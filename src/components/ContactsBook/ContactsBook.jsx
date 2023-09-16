@@ -12,13 +12,13 @@ export const ContactsBook = () => {
   return (
     <Container>
       <Title>Phonebook</Title>
-      <ContactForm />
+      {/* <ContactForm />
 
       <TitleContacts>Contacts</TitleContacts>
       <ContactsWrapper>
         <Filter />
         <Contacts />
-      </ContactsWrapper>
+      </ContactsWrapper> */}
     </Container>
   );
 };
