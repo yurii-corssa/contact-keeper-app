@@ -28,9 +28,20 @@ export const authLogin = createAsyncThunk(
   'auth/login',
   async (credential, thunkAPI) => {
     try {
-      const responce = await axios.post('/users/login', credential);
-      console.log('data:', responce.data);
-      return responce.data;
+      const res = await axios.post('/users/login', credential);
+      return res.data;
+    } catch (e) {
+      thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const authLogout = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      const res = await axios.post('/users/logout');
+      return res;
     } catch (e) {
       thunkAPI.rejectWithValue(e.message);
     }
