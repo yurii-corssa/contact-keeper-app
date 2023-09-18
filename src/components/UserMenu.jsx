@@ -9,21 +9,24 @@ import {
   MenuItem,
   MenuList,
   Portal,
+  Tab,
   Text,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { authLogout } from 'redux/auth/auth-operations';
-import { selectUserName } from 'redux/auth/auth-selectors';
+import { selectIsLoggedIn, selectUserName } from 'redux/auth/auth-selectors';
 
 const UserMenu = () => {
   const name = useSelector(selectUserName);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(authLogout());
   };
 
-  return (
+  return isLoggedIn ? (
     <Flex>
       <Menu>
         <MenuButton>
@@ -44,6 +47,15 @@ const UserMenu = () => {
           </MenuList>
         </Portal>
       </Menu>
+    </Flex>
+  ) : (
+    <Flex>
+      <Link to="/auth/login">
+        <Tab>Login</Tab>
+      </Link>
+      <Link to="/auth/sign-up">
+        <Tab>Sign Up</Tab>
+      </Link>
     </Flex>
   );
 };
