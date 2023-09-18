@@ -9,15 +9,11 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authLogin } from 'redux/auth/auth-operations';
-import { selectUser, selectUserName } from 'redux/auth/auth-selectors';
-import { Helmet } from 'react-helmet';
 
 const LoginForm = () => {
-  const user = useSelector(selectUser);
-
   const dispatch = useDispatch();
 
   const validateEmail = value => {
@@ -42,7 +38,6 @@ const LoginForm = () => {
         }}
         onSubmit={(value, actions) => {
           setTimeout(() => {
-            console.log('submit:', value);
             dispatch(authLogin(value));
             actions.setSubmitting(false);
           }, 1000);
@@ -82,7 +77,7 @@ const LoginForm = () => {
               >
                 Login
               </Button>
-              <Link to="/sign-up">Sign Up</Link>
+              <Link to="/auth/sign-up">Sign Up</Link>
             </Flex>
           </Stack>
         )}
