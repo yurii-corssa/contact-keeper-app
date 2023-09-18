@@ -92,7 +92,7 @@ const RegistrationForm = () => {
               >
                 Sign Up
               </Button>
-              <Link to="/login">I have an account.</Link>
+              <Link to="/auth/login">I have an account.</Link>
             </Flex>
           </Stack>
         )}
