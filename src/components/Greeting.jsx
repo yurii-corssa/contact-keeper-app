@@ -1,6 +1,15 @@
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectIsLoggedIn } from 'redux/auth/auth-selectors';
 
 const Greeting = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navigate = useNavigate();
+
+  // const navigateTo = path => navigate(path);
+
   return (
     <Flex
       direction="column"
@@ -11,7 +20,7 @@ const Greeting = () => {
       w="100%"
       justify="center"
     >
-      <Heading size="2xl" mb={5}>
+      <Heading as="h1" size="2xl" mb={5}>
         Welcome to Contact Keeper!
       </Heading>
       <Text fontSize="lg" mb={2}>
@@ -29,6 +38,34 @@ const Greeting = () => {
       <Text fontSize="lg">
         Start today and bring order to your contacts. 🌟
       </Text>
+      <Stack
+        pt="14"
+        direction="row"
+        spacing={10}
+        justifyContent="center"
+        // variant="solid"
+        // colorScheme="blue"
+      >
+        {isLoggedIn ? (
+          <Button
+            rightIcon={<ArrowForwardIcon />}
+            onClick={() => navigate('/contacts')}
+          >
+            Go to Contacts
+          </Button>
+        ) : (
+          <>
+            <Button onClick={() => navigate('/auth/login')}>Log In</Button>
+            <Button
+              onClick={() => navigate('/auth/sign-up')}
+              colorScheme="white"
+              variant="outline"
+            >
+              Sign Up
+            </Button>
+          </>
+        )}
+      </Stack>
     </Flex>
   );
 };
