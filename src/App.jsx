@@ -1,9 +1,9 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { ContactsBook } from './components/ContactsBook/ContactsBook';
-import SharedLayout from 'components/SharedLayout/SharedLayout';
+import { ContactsBook } from './components/Contacts/ContactTools';
+import SharedLayout from 'components/SharedLayout';
 import Home from 'pages/Home';
-import RegistrationForm from 'components/RegistrationForm';
-import LoginForm from 'components/LoginForm';
+import RegistrationForm from 'components/Auth/RegistrationForm';
+import LoginForm from 'components/Auth/LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { authRefresh } from 'redux/auth/auth-operations';
@@ -16,6 +16,7 @@ import { Flex, Spinner } from '@chakra-ui/react';
 import RestrictedRoute from 'components/RestrictedRoute';
 import PrivateRoute from 'components/PrivateRoute';
 import AuthPage from 'pages/AuthPage';
+import ContactsPage from 'pages/ContactsPage';
 
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -50,7 +51,7 @@ export const App = () => {
         </Route>
         <Route
           path="/contacts"
-          element={<PrivateRoute component={ContactsBook} redirectTo="/" />}
+          element={<PrivateRoute component={ContactsPage} redirectTo="/" />}
         />
       </Route>
     </Routes>

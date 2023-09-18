@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import Greeting from 'components/Greeting';
+import Greeting from 'components/Home/Greeting';
 import { Helmet } from 'react-helmet';
 import { Outlet } from 'react-router-dom';
 

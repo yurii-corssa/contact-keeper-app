@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
-import AuthHeader from 'components/AuthHeader';
-import Greeting from 'components/Greeting';
+import AuthHeader from 'components/Auth/AuthHeader';
+import Greeting from 'components/Home/Greeting';
 import { Helmet } from 'react-helmet';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {

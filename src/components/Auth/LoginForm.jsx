@@ -26,6 +26,13 @@ const LoginForm = () => {
       return 'Password is required';
     }
   };
+
+  const handleSubmit = (value, actions) => {
+    setTimeout(() => {
+      dispatch(authLogin(value));
+      actions.setSubmitting(false);
+    }, 1000);
+  };
   return (
     <Flex direction="column" p={14} width="100%">
       <Heading size="xl" mb={10}>
@@ -36,12 +43,7 @@ const LoginForm = () => {
           email: '',
           password: '',
         }}
-        onSubmit={(value, actions) => {
-          setTimeout(() => {
-            dispatch(authLogin(value));
-            actions.setSubmitting(false);
-          }, 1000);
-        }}
+        onSubmit={handleSubmit}
       >
         {props => (
           <Stack as={Form} gap={3}>
