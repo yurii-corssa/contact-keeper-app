@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { Form, Label } from '../ContactsBook/ContactForm/ContactForm.styled';
 // import { Button } from 'components/Button/Button';
 // import { Input } from 'components/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/contacts/contacts-selectors';
 import { nanoid } from '@reduxjs/toolkit';
 import { normalizeStr } from 'utils/normalizeStr';
-import { addContactThunk } from 'redux/operations';
+import { addContactThunk } from 'redux/contacts/contacts-operations';
 import {
   Button,
   Flex,
@@ -29,41 +29,6 @@ export const ContactForm = () => {
 
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const idName = nanoid();
-  const idNumber = nanoid();
-
-  const handleChange = e => {
-    const { name, value } = e.currentTarget;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  const formReset = () => {
-    setName('');
-    setNumber('');
-  };
-
-  const submitForm = e => {
-    e.preventDefault();
-
-    formReset();
-  };
-
-  /* ---------------------------------- */
-
   const isContact = value =>
     contacts.find(({ name }) => normalizeStr(name) === normalizeStr(value));
 
@@ -74,23 +39,36 @@ export const ContactForm = () => {
   };
   const validateNumber = value => {
     if (!value) {
-      return 'Password is required';
+      return 'Number is required';
     }
   };
 
-  const handleSubmit = (value, actions) => {
-    setTimeout(() => {
-      console.log('submit');
+  // const contactsarr = [
+  //   { name: 'John Smith', number: '+48-123-456-789' },
+  //   { name: 'Jane Brown', number: '+48-132-547-698' },
+  //   { name: 'Michael Clark', number: '+48-321-654-987' },
+  //   { name: 'Sophia Wilson', number: '+48-213-465-879' },
+  //   { name: 'James Taylor', number: '+48-312-546-978' },
+  //   { name: 'Emily White', number: '+48-231-564-897' },
+  //   { name: 'Robert Davis', number: '+48-413-256-789' },
+  //   { name: 'Anna Jones', number: '+48-142-357-689' },
+  //   { name: 'David Miller', number: '+48-421-365-978' },
+  //   { name: 'Sarah Lewis', number: '+48-314-256-897' },
+  // ];
 
-      // if (isContact(name)) {
-      //   alert(`${name} is already to contacts`);
-      //   return;
-      // }
+  // useEffect(() => {
+  //   contactsarr.map(c => dispatch(addContactThunk(c)));
+  //   debugger;
+  // }, []);
 
-      // dispatch(addContactThunk({ name, phone: number }));
-
+  const handleSubmit = ({ name, number }, actions) => {
+    if (isContact(name)) {
+      alert(`${name} is already to contacts`);
       actions.setSubmitting(false);
-    }, 1000);
+      return;
+    }
+    dispatch(addContactThunk({ name, number }));
+    actions.setSubmitting(false);
   };
 
   return (
@@ -117,7 +95,7 @@ export const ContactForm = () => {
                 </FormControl>
               )}
             </Field>
-            <Field type="tel" name="number" validate={validateName}>
+            <Field type="tel" name="number" validate={validateNumber}>
               {({ field, form }) => (
                 <FormControl
                   isInvalid={form.errors.number && form.touched.number}
