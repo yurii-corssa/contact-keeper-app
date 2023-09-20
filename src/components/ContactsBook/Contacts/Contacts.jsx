@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { ContactItems } from '../ContactItems/ContactItems';
+import { ContactItems } from '../../Contacts/ContactItems';
 import { List } from './Contacts.styled';
 import {
   selectContacts,
   selectFilter,
   selectVisibleContacts,
-} from 'redux/selectors';
+} from 'redux/contacts/contacts-selectors';
 import { Notification } from '../Notification/Notification';
 import { useEffect } from 'react';
-import { getContactsThunk } from 'redux/operations';
+import { getContactsThunk } from 'redux/contacts/contacts-operations';
 
 export const Contacts = () => {
   const contacts = useSelector(selectContacts);
