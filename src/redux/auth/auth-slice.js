@@ -33,6 +33,7 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+
       .addCase(authRegister.pending, handlePending)
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authRegister.fulfilled, handleFulfilled)

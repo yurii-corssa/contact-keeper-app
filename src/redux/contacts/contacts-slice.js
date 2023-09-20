@@ -1,11 +1,13 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
 import {
   addContactThunk,
   getContactsThunk,
   removeContactThunk,
-} from './operations';
+} from './contacts-operations';
+import persistReducer from 'redux-persist/es/persistReducer';
 
-const contactsInitialState = {
+const initialState = {
   items: [],
   isLoading: false,
   error: null,
@@ -26,7 +28,7 @@ const handleRejected = (state, action) => {
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: contactsInitialState,
+  initialState,
   extraReducers: builder => {
     builder
       .addMatcher(
@@ -64,4 +66,13 @@ const contactsSlice = createSlice({
   },
 });
 
-export const contactsReduser = contactsSlice.reducer;
+const persistConfig = {
+  key: 'contacts',
+  storage,
+  whitelist: ['items'],
+};
+
+export const contactsPersistReducer = persistReducer(
+  persistConfig,
+  contactsSlice.reducer
+);
