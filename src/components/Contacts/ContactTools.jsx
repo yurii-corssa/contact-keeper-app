@@ -1,6 +1,6 @@
 import { ContactForm } from './ContactForm';
 import { Contacts } from '../ContactsBook/Contacts/Contacts';
-import { Filter } from '../ContactsBook/Filter/Filter';
+import { ContactFilter, Filter } from './ContactFilter';
 import {
   ContactsWrapper,
   Container,
@@ -28,6 +28,7 @@ const ContactTools = () => {
         Simplicity meets efficiency. 📖
       </Text> */}
       <ContactForm />
+      <ContactFilter />
     </Flex>
   );
 };
