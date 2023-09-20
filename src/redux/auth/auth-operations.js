@@ -1,11 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { selectToken } from './auth-selectors';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -57,14 +55,12 @@ export const authRefresh = createAsyncThunk(
     const { token } = thunkAPI.getState().auth;
 
     if (!token) {
-      console.log('выход');
       return thunkAPI.rejectWithValue('No valid token');
     }
 
     setAuthHeader(token);
     try {
       const res = await axios.get('/users/current');
-      console.log('выполнен');
       return res.data;
     } catch (e) {
       thunkAPI.rejectWithValue(e.message);
