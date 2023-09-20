@@ -1,5 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { ContactsBook } from './components/Contacts/ContactTools';
+import { Route, Routes } from 'react-router-dom';
 import SharedLayout from 'components/SharedLayout';
 import Home from 'pages/Home';
 import RegistrationForm from 'components/Auth/RegistrationForm';
@@ -7,11 +6,7 @@ import LoginForm from 'components/Auth/LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { authRefresh } from 'redux/auth/auth-operations';
-import {
-  selectIsLoggedIn,
-  selectIsRefreshing,
-  selectToken,
-} from 'redux/auth/auth-selectors';
+import { selectIsRefreshing } from 'redux/auth/auth-selectors';
 import { Flex, Spinner } from '@chakra-ui/react';
 import RestrictedRoute from 'components/RestrictedRoute';
 import PrivateRoute from 'components/PrivateRoute';
