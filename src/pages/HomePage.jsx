@@ -3,7 +3,7 @@ import Greeting from 'components/Home/Greeting';
 import { Helmet } from 'react-helmet';
 import { Outlet } from 'react-router-dom';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <Flex height="100vh" alignItems="center" justifyContent="space-evenly">
       {/* <Helmet>
@@ -15,4 +15,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
