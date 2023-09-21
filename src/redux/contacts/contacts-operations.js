@@ -8,7 +8,7 @@ export const getContactsThunk = createAsyncThunk(
     const { token } = thunkAPI.getState().auth;
 
     if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
+      return thunkAPI.rejectWithValue(null);
     }
 
     setAuthHeader(token);
@@ -17,7 +17,7 @@ export const getContactsThunk = createAsyncThunk(
       const res = await axios.get('/contacts');
       return res.data;
     } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -29,7 +29,7 @@ export const addContactThunk = createAsyncThunk(
       const res = await axios.post('/contacts', contact);
       return res.data;
     } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -41,7 +41,7 @@ export const removeContactThunk = createAsyncThunk(
       const res = await axios.delete(`/contacts/${id}`);
       return res.data;
     } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
