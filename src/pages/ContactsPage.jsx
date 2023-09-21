@@ -5,9 +5,6 @@ import ContactTools from 'components/Contacts/ContactTools';
 const ContactsPage = () => {
   return (
     <Flex height="100vh">
-      {/* <Helmet>
-        <title>Home</title>
-      </Helmet> */}
       <ContactTools />
       <ContactsList />
     </Flex>
