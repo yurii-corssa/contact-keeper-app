@@ -1,5 +1,8 @@
+import { Field, Form, Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { authRegister } from 'redux/auth/auth-operations';
 import {
-  Box,
   Button,
   Flex,
   FormControl,
@@ -9,10 +12,6 @@ import {
   Input,
   Stack,
 } from '@chakra-ui/react';
-import { Field, Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { authRegister } from 'redux/auth/auth-operations';
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import ContactTools from 'components/Contacts/ContactTools';
 
 const ContactsPage = () => {
   return (
-    <Flex height="100vh">
+    <Flex>
       <ContactTools />
       <ContactsList />
     </Flex>

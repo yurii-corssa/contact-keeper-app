@@ -1,12 +1,5 @@
 import { ContactForm } from './ContactForm';
-import { Contacts } from '../ContactsBook/Contacts/Contacts';
-import { ContactFilter, Filter } from './ContactFilter';
-import {
-  ContactsWrapper,
-  Container,
-  Title,
-  TitleContacts,
-} from '../ContactsBook/ContactsBook.styled';
+import { ContactFilter } from './ContactFilter';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 
 const ContactTools = () => {
@@ -16,7 +9,7 @@ const ContactTools = () => {
       bgGradient="linear(-20deg, #2b5876 0%, #4e4376 100%)"
       p={14}
       color="#fff"
-      h="100%"
+      minH="calc(100vh - 42px)"
       w="100%"
       justify="center"
       alignItems="center"
@@ -34,14 +27,3 @@ const ContactTools = () => {
 };
 
 export default ContactTools;
-
-// <Container>
-//   <Title>Phonebook</Title>
-//   {/* <ContactForm />
-
-//       <TitleContacts>Contacts</TitleContacts>
-//       <ContactsWrapper>
-//         <Filter />
-//         <Contacts />
-//       </ContactsWrapper> */}
-// </Container>;

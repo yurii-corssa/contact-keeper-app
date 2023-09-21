@@ -1,33 +1,22 @@
 import { CopyIcon, DeleteIcon, PhoneIcon } from '@chakra-ui/icons';
-import {
-  Avatar,
-  Flex,
-  IconButton,
-  Text,
-  Tooltip,
-  useClipboard,
-} from '@chakra-ui/react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContactThunk } from 'redux/contacts/contacts-operations';
 import { selectVisibleContacts } from 'redux/contacts/contacts-selectors';
+import { Avatar, Flex, IconButton, Text, Tooltip } from '@chakra-ui/react';
 
 export const ContactItems = () => {
   const filteredContacts = useSelector(selectVisibleContacts);
 
   const dispatch = useDispatch();
-  const clipboard = useClipboard;
 
   return filteredContacts.map(contact => {
     const { id, name, number } = contact;
     const handleRemove = () => dispatch(removeContactThunk(id));
-    // const { onCopy } = clipboard(number);
 
     return (
       <Flex
         key={id}
         alignItems="center"
-        // justifyContent="space-between"
         paddingX="1rem"
         paddingY="0.5rem"
         borderBottom="1px solid"
@@ -54,12 +43,7 @@ export const ContactItems = () => {
             />
           </Tooltip>
           <Tooltip hasArrow label="Copy number" bg="gray.500">
-            <IconButton
-              aria-label="Copy number"
-              icon={<CopyIcon />}
-              // onClick={onCopy}
-              mr={2}
-            />
+            <IconButton aria-label="Copy number" icon={<CopyIcon />} mr={2} />
           </Tooltip>
           <Tooltip hasArrow label="Delete" bg="red.400">
             <IconButton

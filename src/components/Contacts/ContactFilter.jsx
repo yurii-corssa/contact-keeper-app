@@ -1,23 +1,19 @@
-import { Label } from '../ContactsBook/Filter/Filter.styled';
-// import { Input } from 'components/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/filter-slice';
 import { selectFilter } from 'redux/contacts/contacts-selectors';
+import { Field, Form, Formik } from 'formik';
+import { SearchIcon } from '@chakra-ui/icons';
+import debounce from 'lodash.debounce';
+import { useEffect } from 'react';
 import {
   Flex,
   FormControl,
   FormLabel,
-  Icon,
   Input,
   InputGroup,
   InputLeftElement,
   Stack,
 } from '@chakra-ui/react';
-import { Field, Form, Formik } from 'formik';
-import { SearchIcon } from '@chakra-ui/icons';
-import debounce from 'lodash.debounce';
-import { useEffect } from 'react';
-// import { Form } from 'react-router-dom';
 
 export const ContactFilter = () => {
   const filter = useSelector(selectFilter);
@@ -30,7 +26,7 @@ export const ContactFilter = () => {
 
   useEffect(() => {
     return () => {
-      debouncedSetFilter.cancel(); // Отменяем debounce при размонтировании компонента
+      debouncedSetFilter.cancel();
     };
   }, [debouncedSetFilter]);
 

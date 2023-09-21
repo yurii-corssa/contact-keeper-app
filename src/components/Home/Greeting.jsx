@@ -8,8 +8,6 @@ const Greeting = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
 
-  // const navigateTo = path => navigate(path);
-
   return (
     <Flex
       direction="column"
@@ -38,14 +36,7 @@ const Greeting = () => {
       <Text fontSize="lg">
         Start today and bring order to your contacts. 🌟
       </Text>
-      <Stack
-        pt="14"
-        direction="row"
-        spacing={10}
-        justifyContent="center"
-        // variant="solid"
-        // colorScheme="blue"
-      >
+      <Stack pt="14" direction="row" spacing={10} justifyContent="center">
         {isLoggedIn ? (
           <Button
             rightIcon={<ArrowForwardIcon />}
