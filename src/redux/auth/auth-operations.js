@@ -19,7 +19,7 @@ export const authRegister = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -31,8 +31,9 @@ export const authLogin = createAsyncThunk(
       const res = await axios.post('/users/login', credential);
       setAuthHeader(res.data.token);
       return res.data;
-    } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+    } catch {
+      const message = 'Incorrect email or password. Please try again.';
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -44,7 +45,7 @@ export const authLogout = createAsyncThunk(
       await axios.post('/users/logout');
       clearAuthHeader();
     } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -55,7 +56,7 @@ export const authRefresh = createAsyncThunk(
     const { token } = thunkAPI.getState().auth;
 
     if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
+      return thunkAPI.rejectWithValue(null);
     }
 
     setAuthHeader(token);
@@ -63,7 +64,7 @@ export const authRefresh = createAsyncThunk(
       const res = await axios.get('/users/current');
       return res.data;
     } catch (e) {
-      thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );

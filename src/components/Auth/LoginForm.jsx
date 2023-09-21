@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Button,
   Flex,
   FormControl,
@@ -8,12 +10,15 @@ import {
   Input,
   Stack,
 } from '@chakra-ui/react';
+import AlertError from 'components/AlertError';
 import { Field, Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authLogin } from 'redux/auth/auth-operations';
+import { selectAuthError } from 'redux/auth/auth-selectors';
 
 const LoginForm = () => {
+  const authError = useSelector(selectAuthError);
   const dispatch = useDispatch();
 
   const validateEmail = value => {
@@ -69,6 +74,8 @@ const LoginForm = () => {
                 </FormControl>
               )}
             </Field>
+
+            {authError && <AlertError errorMessage={authError} />}
 
             <Flex justifyContent="space-evenly" alignItems="center">
               <Button

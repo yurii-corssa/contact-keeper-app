@@ -11,11 +11,13 @@ import {
 const initialState = {
   user: { name: null, email: null },
   token: null,
+  error: null,
   isRefreshing: false,
 };
 
 const handlePending = state => {
   state.isRefreshing = true;
+  state.error = null;
 };
 
 const handleFulfilled = (state, { payload }) => {
@@ -24,8 +26,9 @@ const handleFulfilled = (state, { payload }) => {
   state.isRefreshing = false;
 };
 
-const handleRejected = state => {
+const handleRejected = (state, { payload }) => {
   state.isRefreshing = false;
+  state.error = payload;
 };
 
 const authSlice = createSlice({
@@ -33,11 +36,12 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-
       .addCase(authRegister.pending, handlePending)
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authRegister.fulfilled, handleFulfilled)
-      .addCase(authLogin.pending, handlePending)
+      .addCase(authLogin.pending, state => {
+        state.error = null;
+      })
       .addCase(authLogin.rejected, handleRejected)
       .addCase(authLogin.fulfilled, handleFulfilled)
       .addCase(authLogout.pending, handlePending)
