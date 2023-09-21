@@ -20,7 +20,7 @@ const Header = () => {
         return 2;
 
       default:
-        return 0;
+        return null;
     }
   };
 

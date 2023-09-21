@@ -12,6 +12,7 @@ import RestrictedRoute from 'components/RestrictedRoute';
 import PrivateRoute from 'components/PrivateRoute';
 import AuthPage from 'pages/AuthPage';
 import ContactsPage from 'pages/ContactsPage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -48,6 +49,7 @@ export const App = () => {
           path="/contacts"
           element={<PrivateRoute component={ContactsPage} redirectTo="/" />}
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

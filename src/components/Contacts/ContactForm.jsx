@@ -69,6 +69,7 @@ export const ContactForm = () => {
     }
     dispatch(addContactThunk({ name, number }));
     actions.setSubmitting(false);
+    actions.resetForm();
   };
 
   return (
