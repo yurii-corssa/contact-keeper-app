@@ -14,13 +14,16 @@ const ContactTools = () => {
       justify="center"
       alignItems="center"
     >
-      <Heading as="h1" size="2xl" mb={5}>
-        Phonebook
+      <Heading as="h1" size="2xl" paddingY="5">
+        Contact Keeper
       </Heading>
-      {/* <Text fontSize="lg" mb={2}>
-        Simplicity meets efficiency. 📖
-      </Text> */}
+      <Text paddingX="14" paddingY="5" textAlign="center" fontSize="lg">
+        Add your contacts and keep them organized in one place. Get started now!
+      </Text>
       <ContactForm />
+      <Text paddingX="14" paddingY="5" textAlign="center" fontSize="md">
+        Too many contacts? Just start typing a name and let the magic happen!
+      </Text>
       <ContactFilter />
     </Flex>
   );
