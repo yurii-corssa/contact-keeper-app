@@ -42,9 +42,7 @@ export const ContactItems = () => {
               mr={2}
             />
           </Tooltip>
-          <Tooltip hasArrow label="Copy number" bg="gray.500">
-            <IconButton aria-label="Copy number" icon={<CopyIcon />} mr={2} />
-          </Tooltip>
+
           <Tooltip hasArrow label="Delete" bg="red.400">
             <IconButton
               aria-label="Delete"
