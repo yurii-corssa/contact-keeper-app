@@ -6,7 +6,7 @@ import LoadSpinner from './LoadSpinner';
 
 const SharedLayout = () => {
   return (
-    <Container maxW="1200px" margin="0 auto">
+    <Container maxW="1200px" bgColor="#fff" p="0" margin="0 auto">
       <Header />
       <main>
         <Suspense fallback={<LoadSpinner />}>
