@@ -1,12 +1,12 @@
 import { Flex } from '@chakra-ui/react';
-import AuthHeader from 'components/Auth/AuthHeader';
+import AuthGreeting from 'components/Auth/AuthGreeting';
 import { Outlet } from 'react-router-dom';
 
 const AuthPage = () => {
   return (
-    <Flex height="100vh" alignItems="center" justifyContent="space-evenly">
+    <Flex alignItems="center" justifyContent="space-evenly">
       <Outlet />
-      <AuthHeader />
+      <AuthGreeting />
     </Flex>
   );
 };
