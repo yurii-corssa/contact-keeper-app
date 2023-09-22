@@ -1,7 +1,10 @@
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { authLogout } from 'redux/auth/auth-operations';
+import { selectIsLoggedIn, selectUserName } from 'redux/auth/auth-selectors';
 import {
   Avatar,
-  Button,
   Flex,
   Menu,
   MenuButton,
@@ -12,10 +15,6 @@ import {
   Tab,
   Text,
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { authLogout } from 'redux/auth/auth-operations';
-import { selectIsLoggedIn, selectUserName } from 'redux/auth/auth-selectors';
 
 const UserMenu = () => {
   const name = useSelector(selectUserName);
@@ -29,7 +28,7 @@ const UserMenu = () => {
   return isLoggedIn ? (
     <Flex>
       <Menu>
-        <MenuButton>
+        <MenuButton mr="5">
           <Avatar mr={2} size="xs" name={name} src="#" />
           <Text as="b" mr={1}>
             {name}
