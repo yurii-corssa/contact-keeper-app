@@ -31,11 +31,11 @@ export const ContactFilter = () => {
   }, [debouncedSetFilter]);
 
   return (
-    <Flex direction="column" p={14} width="100%">
+    <Flex direction="column" paddingX="14" width="100%">
       <Formik initialValues={{ filter }}>
         {() => (
           <Stack as={Form}>
-            <Field type="text" name="filter">
+            <Field name="filter">
               {({ field }) => (
                 <FormControl>
                   <FormLabel>Filter</FormLabel>
@@ -44,13 +44,16 @@ export const ContactFilter = () => {
                       <SearchIcon color="gray.300" />
                     </InputLeftElement>
                     <Input
+                      type="text"
+                      variant="filled"
+                      placeholder="Find contacts by name"
+                      color="black"
+                      _focus={{ color: 'white' }}
                       {...field}
                       onChange={e => {
                         field.onChange(e);
                         debouncedSetFilter(e.target.value);
                       }}
-                      variant="filled"
-                      placeholder="Find contacts by name"
                     />
                   </InputGroup>
                 </FormControl>
