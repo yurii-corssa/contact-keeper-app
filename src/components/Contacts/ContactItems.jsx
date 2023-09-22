@@ -1,4 +1,4 @@
-import { CopyIcon, DeleteIcon, PhoneIcon } from '@chakra-ui/icons';
+import { DeleteIcon, PhoneIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContactThunk } from 'redux/contacts/contacts-operations';
 import { selectVisibleContacts } from 'redux/contacts/contacts-selectors';
