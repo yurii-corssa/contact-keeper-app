@@ -1,19 +1,12 @@
 import AlertError from 'components/AlertError';
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authLogin } from 'redux/auth/auth-operations';
 import { selectAuthError } from 'redux/auth/auth-selectors';
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Heading,
-  Input,
-  Stack,
-} from '@chakra-ui/react';
+import { Button, Flex, Heading, Stack } from '@chakra-ui/react';
+import AuthEmailInput from 'components/Inputs/AuthEmailInput';
+import AuthPasswordInput from 'components/Inputs/AuthPasswordInput';
 
 const LoginForm = () => {
   const authError = useSelector(selectAuthError);
@@ -31,13 +24,18 @@ const LoginForm = () => {
   };
 
   const handleSubmit = (value, actions) => {
-    setTimeout(() => {
-      dispatch(authLogin(value));
-      actions.setSubmitting(false);
-    }, 1000);
+    dispatch(authLogin(value));
+    actions.setSubmitting(false);
   };
+
   return (
-    <Flex direction="column" p={14} width="100%">
+    <Flex
+      direction="column"
+      p={14}
+      minH="calc(100vh - 42px)"
+      justify="center"
+      width="100%"
+    >
       <Heading size="xl" mb={10}>
         Sign in
       </Heading>
@@ -50,34 +48,13 @@ const LoginForm = () => {
       >
         {props => (
           <Stack as={Form} gap={3}>
-            <Field type="email" name="email" validate={validateEmail}>
-              {({ field, form }) => (
-                <FormControl
-                  isInvalid={form.errors.email && form.touched.email}
-                >
-                  <FormLabel>Email</FormLabel>
-                  <Input {...field} placeholder="your.email@mail.com" />
-                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-            <Field type="password" name="password" validate={validatePassword}>
-              {({ field, form }) => (
-                <FormControl
-                  isInvalid={form.errors.password && form.touched.password}
-                >
-                  <FormLabel>Password</FormLabel>
-                  <Input {...field} />
-                  <FormErrorMessage>{form.errors.password}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
+            <AuthEmailInput validateEmail={validateEmail} />
+            <AuthPasswordInput validatePassword={validatePassword} />
 
             {authError && <AlertError errorMessage={authError} />}
 
-            <Flex justifyContent="space-evenly" alignItems="center">
+            <Flex justifyContent="center" alignItems="center" gap="10" pt="5">
               <Button
-                textColor="fff"
                 colorScheme="blue"
                 isLoading={props.isSubmitting}
                 type="submit"
