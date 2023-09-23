@@ -1,18 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { setAuthHeader } from 'redux/auth/auth-operations';
 
 export const getContactsThunk = createAsyncThunk(
   'contacts/getContactsThunk',
   async (_, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue(null);
-    }
-
-    setAuthHeader(token);
-
     try {
       const res = await axios.get('/contacts');
       return res.data;
