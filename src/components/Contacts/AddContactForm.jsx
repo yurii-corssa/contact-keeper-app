@@ -7,12 +7,12 @@ import { Button, Flex, Stack, useToast } from '@chakra-ui/react';
 import ContactNameInput from 'components/Inputs/ContactNameInput';
 import ContactNumberInput from 'components/Inputs/ContactNumberInput';
 
-export const ContactForm = ({ initialValues = { name: '', number: '' } }) => {
+export const AddContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   const toast = useToast();
 
-  // const initialValues = { name: '', number: '' };
+  const initialValues = { name: '', number: '' };
 
   const isContact = value =>
     contacts.find(({ name }) => normalizeStr(name) === normalizeStr(value));
@@ -40,8 +40,8 @@ export const ContactForm = ({ initialValues = { name: '', number: '' } }) => {
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {props => (
           <Stack as={Form} gap={3}>
-            <ContactNameInput />
-            <ContactNumberInput />
+            <ContactNameInput variant="filled" />
+            <ContactNumberInput variant="filled" />
             <Button
               textColor="fff"
               colorScheme="blue"
