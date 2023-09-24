@@ -1,4 +1,4 @@
-import { ContactForm } from './ContactForm';
+import { AddContactForm } from './AddContactForm';
 import { ContactFilter } from './ContactFilter';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 
@@ -20,7 +20,7 @@ const ContactTools = () => {
       <Text paddingX="14" paddingY="5" textAlign="center" fontSize="lg">
         Add your contacts and keep them organized in one place. Get started now!
       </Text>
-      <ContactForm />
+      <AddContactForm />
       <Text paddingX="14" paddingY="5" textAlign="center" fontSize="md">
         Too many contacts? Just start typing a name and let the magic happen!
       </Text>
