@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { Field } from 'formik';
 
-const ContactNumberInput = () => {
+const ContactNumberInput = ({ variant }) => {
   const validateNumber = value => {
     if (!value) {
       return 'Number is required';
@@ -30,9 +30,9 @@ const ContactNumberInput = () => {
               required
               autoComplete=""
               placeholder="123-456-7890"
-              variant="filled"
               color="black"
-              _focus={{ color: 'white' }}
+              variant={variant}
+              _focus={{ color: variant === 'filled' ? 'white' : 'black' }}
               {...field}
             />
           </InputGroup>
