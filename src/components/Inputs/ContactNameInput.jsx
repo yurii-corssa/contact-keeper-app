@@ -1,3 +1,5 @@
+import { Field } from 'formik';
+import { FaUserAlt } from 'react-icons/fa';
 import {
   FormControl,
   FormErrorMessage,
@@ -7,10 +9,8 @@ import {
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/react';
-import { Field } from 'formik';
-import { FaUserAlt } from 'react-icons/fa';
 
-const ContactNameInput = () => {
+const ContactNameInput = ({ variant }) => {
   const validateName = value => {
     if (!value) {
       return 'Name is required';
@@ -31,9 +31,9 @@ const ContactNameInput = () => {
               required
               autoComplete="name"
               placeholder="Full Name"
-              variant="filled"
               color="black"
-              _focus={{ color: 'white' }}
+              variant={variant}
+              _focus={{ color: variant === 'filled' ? 'white' : 'black' }}
               {...field}
             />
           </InputGroup>
