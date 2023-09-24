@@ -1,17 +1,32 @@
-import { DeleteIcon, PhoneIcon } from '@chakra-ui/icons';
+import { DeleteIcon, EditIcon, PhoneIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContactThunk } from 'redux/contacts/contacts-operations';
 import { selectVisibleContacts } from 'redux/contacts/contacts-selectors';
-import { Avatar, Flex, IconButton, Text, Tooltip } from '@chakra-ui/react';
+import { FaEllipsisV } from 'react-icons/fa';
+import {
+  Avatar,
+  Flex,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuGroup,
+  MenuItem,
+  MenuList,
+  Portal,
+  Text,
+  Tooltip,
+} from '@chakra-ui/react';
 
-export const ContactItems = () => {
+export const ContactItems = ({ handleOpenModal }) => {
   const filteredContacts = useSelector(selectVisibleContacts);
-
   const dispatch = useDispatch();
 
   return filteredContacts.map(contact => {
     const { id, name, number } = contact;
+
     const handleRemove = () => dispatch(removeContactThunk(id));
+
+    const onOpenModal = () => handleOpenModal(id, name, number);
 
     return (
       <Flex
@@ -43,15 +58,28 @@ export const ContactItems = () => {
             />
           </Tooltip>
 
-          <Tooltip hasArrow label="Delete" bg="red.400">
-            <IconButton
-              aria-label="Delete"
-              icon={<DeleteIcon />}
-              colorScheme="red"
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label="settings"
+              icon={<FaEllipsisV />}
               variant="ghost"
-              onClick={handleRemove}
             />
-          </Tooltip>
+            <Portal>
+              <MenuList>
+                <MenuGroup title="Settings">
+                  <MenuItem gap="2" fontSize="0.9rem" onClick={onOpenModal}>
+                    <EditIcon />
+                    Edit
+                  </MenuItem>
+                  <MenuItem gap="2" fontSize="0.9rem" onClick={handleRemove}>
+                    <DeleteIcon />
+                    Delete
+                  </MenuItem>
+                </MenuGroup>
+              </MenuList>
+            </Portal>
+          </Menu>
         </Flex>
       </Flex>
     );
