@@ -1,11 +1,12 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
+import persistReducer from 'redux-persist/es/persistReducer';
 import {
   addContactThunk,
+  editContactThunk,
   getContactsThunk,
   removeContactThunk,
 } from './contacts-operations';
-import persistReducer from 'redux-persist/es/persistReducer';
 
 const initialState = {
   items: [],
@@ -13,7 +14,12 @@ const initialState = {
   error: null,
 };
 
-const thunkActionsArr = [getContactsThunk, addContactThunk, removeContactThunk];
+const thunkActionsArr = [
+  getContactsThunk,
+  addContactThunk,
+  removeContactThunk,
+  editContactThunk,
+];
 
 const getThunkStatusActions = status => thunkActionsArr.map(el => el[status]);
 
@@ -51,6 +57,13 @@ const contactsSlice = createSlice({
                 contact => contact.id === action.payload.id
               );
               state.items.splice(index, 1);
+              break;
+
+            case editContactThunk.fulfilled.type:
+              const i = state.items.findIndex(
+                contact => contact.id === action.payload.id
+              );
+              state.items.splice(i, 1, action.payload);
               break;
 
             default:
