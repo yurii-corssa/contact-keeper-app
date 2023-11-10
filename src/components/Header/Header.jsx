@@ -1,4 +1,4 @@
-import { Flex, Tab, TabList, Tabs } from '@chakra-ui/react';
+import { Flex, Tab, TabIndicator, TabList, Tabs } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
 import UserMenu from './UserMenu';
 import { selectIsLoggedIn } from 'redux/auth/auth-selectors';
@@ -27,8 +27,20 @@ const Header = () => {
   const tabIndex = getTabIndex(location.pathname);
 
   return (
-    <Tabs as="header" index={tabIndex}>
-      <Flex as={TabList} justifyContent="space-between" alignItems="center">
+    <Tabs
+      as="header"
+      index={tabIndex}
+      position="absolute"
+      width="100%"
+      bg="#fff"
+      shadow="md"
+    >
+      <Flex
+        as={TabList}
+        justifyContent="space-between"
+        align="center"
+        paddingX="5"
+      >
         <Flex>
           <Link to="/">
             <Tab>Home</Tab>
@@ -39,6 +51,7 @@ const Header = () => {
             </Link>
           )}
         </Flex>
+
         <UserMenu />
       </Flex>
     </Tabs>

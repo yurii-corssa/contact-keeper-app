@@ -12,7 +12,7 @@ import { FaUserAlt } from 'react-icons/fa';
 
 const AuthNameInput = ({ validateName }) => {
   return (
-    <Field name="name" validate={validateName}>
+    <Field name="username" validate={validateName}>
       {({ field, form }) => (
         <FormControl isInvalid={form.errors.name && form.touched.name}>
           <FormLabel>Name</FormLabel>
@@ -28,7 +28,7 @@ const AuthNameInput = ({ validateName }) => {
               {...field}
             />
           </InputGroup>
-          <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+          <FormErrorMessage>{form.errors.username}</FormErrorMessage>
         </FormControl>
       )}
     </Field>

@@ -9,19 +9,20 @@ const ContactTools = () => {
       bgGradient="linear(-20deg, #2b5876 0%, #4e4376 100%)"
       p={14}
       color="#fff"
-      minH="calc(100vh - 42px)"
       w="100%"
+      height={{ base: '100%', lg: '100vh' }}
       justify="center"
       alignItems="center"
+      shadow="md"
     >
       <Heading as="h1" size="2xl" paddingY="5">
         Contact Keeper
       </Heading>
-      <Text paddingX="14" paddingY="5" textAlign="center" fontSize="lg">
+      <Text paddingY="5" textAlign="center" fontSize="lg" maxW="380px">
         Add your contacts and keep them organized in one place. Get started now!
       </Text>
       <AddContactForm />
-      <Text paddingX="14" paddingY="5" textAlign="center" fontSize="md">
+      <Text paddingY="5" textAlign="center" fontSize="md" maxW="380px">
         Too many contacts? Just start typing a name and let the magic happen!
       </Text>
       <ContactFilter />

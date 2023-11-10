@@ -9,7 +9,7 @@ import {
 } from './auth-operations';
 
 const initialState = {
-  user: { name: null, email: null },
+  user: { username: null, email: null },
   token: null,
   error: null,
   isRefreshing: false,
@@ -54,7 +54,7 @@ const authSlice = createSlice({
       .addCase(authRefresh.pending, handlePending)
       .addCase(authRefresh.rejected, handleRejected)
       .addCase(authRefresh.fulfilled, (state, { payload }) => {
-        state.user = payload;
+        state.user = payload.user;
         state.isRefreshing = false;
       });
   },

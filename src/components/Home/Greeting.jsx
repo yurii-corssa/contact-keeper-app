@@ -14,7 +14,8 @@ const Greeting = () => {
       bgGradient="linear(-20deg, #2b5876 0%, #4e4376 100%)"
       p={14}
       color="#fff"
-      minH="calc(100vh - 42px)"
+      // minH="calc(100vh - 42px)"
+      height="100vh"
       w="100%"
       justify="center"
     >

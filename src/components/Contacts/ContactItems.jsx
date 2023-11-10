@@ -22,11 +22,11 @@ export const ContactItems = ({ handleOpenModal }) => {
   const dispatch = useDispatch();
 
   return filteredContacts.map(contact => {
-    const { id, name, number } = contact;
+    const { id, name, phone } = contact;
 
     const handleRemove = () => dispatch(removeContactThunk(id));
 
-    const onOpenModal = () => handleOpenModal(id, name, number);
+    const onOpenModal = () => handleOpenModal(id, name, phone);
 
     return (
       <Flex
@@ -39,13 +39,14 @@ export const ContactItems = ({ handleOpenModal }) => {
       >
         <Avatar name={name} mr={3} />
         <Flex
-          alignItems="center"
+          alignItems={{ base: 'start', sm: 'center' }}
           justifyContent="space-between"
+          direction={{ base: 'column', sm: 'row' }}
           width="100%"
           pr={5}
         >
           <Text fontWeight="bold">{name}:</Text>
-          <Text>{number}</Text>
+          <Text>{phone}</Text>
         </Flex>
         <Flex>
           <Tooltip hasArrow label="Call" bg="gray.500">
@@ -53,7 +54,7 @@ export const ContactItems = ({ handleOpenModal }) => {
               aria-label="Call"
               icon={<PhoneIcon />}
               as="a"
-              href={`tel:${number}`}
+              href={`tel:${phone}`}
               mr={2}
             />
           </Tooltip>

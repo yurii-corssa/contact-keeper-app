@@ -4,7 +4,11 @@ import { Outlet } from 'react-router-dom';
 
 const AuthPage = () => {
   return (
-    <Flex alignItems="center" justifyContent="space-evenly">
+    <Flex
+      alignItems="center"
+      justifyContent="space-evenly"
+      flexDir={{ base: 'column-reverse', lg: 'row' }}
+    >
       <Outlet />
       <AuthGreeting />
     </Flex>
