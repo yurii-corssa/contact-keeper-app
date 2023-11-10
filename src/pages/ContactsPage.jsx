@@ -4,7 +4,7 @@ import ContactTools from 'components/Contacts/ContactTools';
 
 const ContactsPage = () => {
   return (
-    <Flex>
+    <Flex flexDir={{ base: 'column', lg: 'row' }} align="center">
       <ContactTools />
       <ContactsList />
     </Flex>

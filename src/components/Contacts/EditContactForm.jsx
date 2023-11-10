@@ -18,7 +18,7 @@ export const EditContactForm = ({ id, initialValues, onClose }) => {
         normalizeStr(contact.name) === normalizeStr(value) && contact.id !== id
     );
 
-  const handleSubmit = ({ name, number }, actions) => {
+  const handleSubmit = ({ name, phone }, actions) => {
     if (isContact(name)) {
       toast({
         title: 'Duplicate Contact',
@@ -31,7 +31,7 @@ export const EditContactForm = ({ id, initialValues, onClose }) => {
       actions.setSubmitting(false);
       return;
     }
-    dispatch(editContactThunk({ id, name, number }));
+    dispatch(editContactThunk({ id, name, phone }));
     actions.setSubmitting(false);
     onClose();
   };

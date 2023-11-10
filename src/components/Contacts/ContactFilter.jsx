@@ -31,7 +31,7 @@ export const ContactFilter = () => {
   }, [debouncedSetFilter]);
 
   return (
-    <Flex direction="column" paddingX="14" width="100%">
+    <Flex direction="column" maxW="380px" width="100%">
       <Formik initialValues={{ filter }}>
         {() => (
           <Stack as={Form}>

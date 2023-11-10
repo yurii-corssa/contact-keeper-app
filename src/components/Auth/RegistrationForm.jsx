@@ -11,7 +11,7 @@ const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    name: '',
+    username: '',
     email: '',
     password: '',
   };
@@ -59,13 +59,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <Flex
-      direction="column"
-      p={14}
-      minH="calc(100vh - 42px)"
-      justify="center"
-      width="100%"
-    >
+    <Flex direction="column" p={14} justify="center" width="100%">
       <Heading size="xl" mb={10}>
         Create Account
       </Heading>

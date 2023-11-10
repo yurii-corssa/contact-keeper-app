@@ -5,11 +5,12 @@ const AuthGreeting = () => {
     <Flex
       direction="column"
       bgGradient="linear(-20deg, #2b5876 0%, #4e4376 100%)"
-      p={14}
+      p="56px"
       color="#fff"
-      minH="calc(100vh - 42px)"
       w="100%"
       justify="center"
+      h={{ base: '100%', lg: '100vh' }}
+      minH="50vh"
     >
       <Heading as="h2" size="2xl" mb={5}>
         Join the Contact Keeper Family! 🌍

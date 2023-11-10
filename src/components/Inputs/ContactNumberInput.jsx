@@ -12,15 +12,15 @@ import { Field } from 'formik';
 const ContactNumberInput = ({ variant }) => {
   const validateNumber = value => {
     if (!value) {
-      return 'Number is required';
+      return 'Phone is required';
     }
   };
 
   return (
-    <Field name="number" validate={validateNumber}>
+    <Field name="phone" validate={validateNumber}>
       {({ field, form }) => (
-        <FormControl isInvalid={form.errors.number && form.touched.number}>
-          <FormLabel>Number</FormLabel>
+        <FormControl isInvalid={form.errors.phone && form.touched.phone}>
+          <FormLabel>Phone</FormLabel>
           <InputGroup>
             <InputLeftElement pointerEvents="none">
               <PhoneIcon color="gray.300" />
@@ -36,7 +36,7 @@ const ContactNumberInput = ({ variant }) => {
               {...field}
             />
           </InputGroup>
-          <FormErrorMessage>{form.errors.number}</FormErrorMessage>
+          <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
         </FormControl>
       )}
     </Field>

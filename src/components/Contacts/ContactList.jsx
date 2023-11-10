@@ -15,7 +15,7 @@ import { EditContactForm } from './EditContactForm';
 const ContactsList = () => {
   const [id, setId] = useState('');
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const contacts = useSelector(selectContacts);
   const filteredContacts = useSelector(selectVisibleContacts);
@@ -26,17 +26,23 @@ const ContactsList = () => {
     dispatch(getContactsThunk());
   }, [dispatch]);
 
-  const handleOpenModal = (inputId, inputName, inputNumber) => {
+  const handleOpenModal = (inputId, inputName, inputPhone) => {
     setId(inputId);
     setName(inputName);
-    setNumber(inputNumber);
+    setPhone(inputPhone);
     onOpen();
   };
 
   return (
     <>
-      <Flex direction="column" width="100%">
-        <Box h="calc(100vh - 42px)" overflowY="auto">
+      <Flex
+        direction="column"
+        w="100%"
+        h={{ base: 'calc(100vh - 148px)', lg: '100vh' }}
+        maxW="570px"
+        pt={{ base: '0', lg: '42px' }}
+      >
+        <Box height="100%" overflowY="auto">
           {contacts.length === 0 ? (
             <NoContactNotice />
           ) : filteredContacts.length === 0 ? (
@@ -49,7 +55,7 @@ const ContactsList = () => {
       <ModalWindow isOpen={isOpen} onClose={onClose} title="Edit Contact">
         <EditContactForm
           id={id}
-          initialValues={{ name, number }}
+          initialValues={{ name, phone }}
           onClose={onClose}
         />
       </ModalWindow>

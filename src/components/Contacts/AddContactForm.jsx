@@ -12,12 +12,12 @@ export const AddContactForm = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const initialValues = { name: '', number: '' };
+  const initialValues = { name: '', phone: '' };
 
   const isContact = value =>
     contacts.find(({ name }) => normalizeStr(name) === normalizeStr(value));
 
-  const handleSubmit = ({ name, number }, actions) => {
+  const handleSubmit = ({ name, phone }, actions) => {
     if (isContact(name)) {
       toast({
         title: 'Duplicate Contact',
@@ -30,13 +30,13 @@ export const AddContactForm = () => {
       actions.setSubmitting(false);
       return;
     }
-    dispatch(addContactThunk({ name, number }));
+    dispatch(addContactThunk({ name, phone }));
     actions.setSubmitting(false);
     actions.resetForm();
   };
 
   return (
-    <Flex direction="column" paddingX="14" paddingY="5" width="100%">
+    <Flex direction="column" maxW="380px" paddingY="5" width="100%">
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {props => (
           <Stack as={Form} gap={3}>
