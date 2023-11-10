@@ -1,4 +1,4 @@
-import { Flex, Tab, TabIndicator, TabList, Tabs } from '@chakra-ui/react';
+import { Flex, Tab, TabList, Tabs } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
 import UserMenu from './UserMenu';
 import { selectIsLoggedIn } from 'redux/auth/auth-selectors';
