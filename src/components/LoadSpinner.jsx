@@ -1,21 +1,29 @@
-import { Spinner } from '@chakra-ui/react';
+import { Flex, Spinner } from '@chakra-ui/react';
 import React from 'react';
 
 const LoadSpinner = () => {
   return (
-    <Spinner
+    <Flex
       position="fixed"
       top="0"
       left="0"
       right="0"
       bottom="0"
+      justify="center"
+      align="center"
+      w="100%"
+      h="100vh"
       margin="auto"
-      thickness="4px"
-      speed="0.65s"
-      emptyColor="gray.200"
-      color="blue.500"
-      size="xl"
-    />
+      background="#2b587653"
+    >
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="#4e4376"
+        size="xl"
+      />
+    </Flex>
   );
 };
 

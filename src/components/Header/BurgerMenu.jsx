@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { selectIsLoggedIn } from 'redux/auth/auth-selectors';
-import UserMenu from './Header/UserMenu';
+import UserMenu from './UserMenu';
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +43,7 @@ const BurgerMenu = () => {
   const tabIndex = getTabIndex(location.pathname);
 
   return (
-    <Box position="relative">
+    <Box position="relative" as="header">
       <IconButton
         onClick={toggleMenu}
         variant="ghost"

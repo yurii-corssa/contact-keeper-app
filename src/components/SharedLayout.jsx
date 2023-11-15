@@ -1,17 +1,19 @@
-import { Box, useMediaQuery } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import Header from 'components/Header/Header';
+import BurgerMenu from './Header/BurgerMenu';
+import { useDevice } from 'deviceContext';
+import Background from './Background';
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
 import LoadSpinner from './LoadSpinner';
-import BurgerMenu from './BurgerMenu';
+import { Outlet } from 'react-router-dom';
 
 const SharedLayout = () => {
-  const [isMobile] = useMediaQuery('(max-width: 992px)');
-
+  const { deviceType } = useDevice();
   return (
-    <Box maxW="1200px" bgColor="#fff" p="0" margin="0 auto" position="relative">
-      {isMobile ? <BurgerMenu /> : <Header />}
+    <Box maxW="1200px" p="0" margin="0 auto" position="relative">
+      {deviceType !== 'desktop' ? <BurgerMenu /> : <Header />}
       <main>
+        <Background />
         <Suspense fallback={<LoadSpinner />}>
           <Outlet />
         </Suspense>

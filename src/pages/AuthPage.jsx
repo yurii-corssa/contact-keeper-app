@@ -1,13 +1,15 @@
 import { Flex } from '@chakra-ui/react';
-import AuthGreeting from 'components/Auth/AuthGreeting';
+import AuthGreeting from 'components/Main/Auth/AuthGreeting';
+import { useDevice } from 'deviceContext';
 import { Outlet } from 'react-router-dom';
 
 const AuthPage = () => {
+  const { deviceType } = useDevice();
+
   return (
     <Flex
-      alignItems="center"
-      justifyContent="space-evenly"
-      flexDir={{ base: 'column-reverse', lg: 'row' }}
+      align="center"
+      flexDir={deviceType !== 'desktop' ? 'column-reverse' : 'row'}
     >
       <Outlet />
       <AuthGreeting />

@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import Greeting from 'components/Home/Greeting';
+import Greeting from 'components/Main/Home/Greeting';
 
 const HomePage = () => {
   return (
