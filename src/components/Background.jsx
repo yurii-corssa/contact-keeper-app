@@ -25,6 +25,7 @@ const Background = () => {
         ...defaultAnimation,
         left: '0%',
         width: '100%',
+        height: '100vh',
       });
     }
     if (isAuthPage) {
@@ -32,6 +33,7 @@ const Background = () => {
         ...defaultAnimation,
         left: !isDesktop ? '0' : '50%',
         width: !isDesktop ? '100%' : '50%',
+        height: !isDesktop ? '50vh' : '100vh',
       });
     }
     if (isContactsPage) {
@@ -39,6 +41,7 @@ const Background = () => {
         ...defaultAnimation,
         left: '0',
         width: !isDesktop ? '100%' : '50%',
+        height: !isDesktop ? '50vh' : '100vh',
       });
     }
   }, [controls, isAuthPage, isContactsPage, isDesktop, isHomePage]);
@@ -47,6 +50,7 @@ const Background = () => {
     initial: {
       left: isAuthPage ? (!isDesktop ? '0%' : '50%') : '0%',
       width: !isHomePage ? (!isDesktop ? '100%' : '50%') : '100%',
+      height: !isHomePage ? (!isDesktop ? '50vh' : '100vh') : '100vh',
       opacity: 0,
     },
     animate: controls,
@@ -59,7 +63,6 @@ const Background = () => {
         {...bgAnimation}
         position="absolute"
         top="0"
-        h="100%"
         bgGradient="linear(-20deg, #2b5876 0%, #4e4376 100%)"
       />
     </Flex>
