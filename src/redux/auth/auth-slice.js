@@ -34,6 +34,9 @@ const handleRejected = (state, { payload }) => {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    resetAuthState: () => initialState,
+  },
   extraReducers: builder => {
     builder
       .addCase(authRegister.pending, handlePending)
@@ -60,6 +63,7 @@ const authSlice = createSlice({
   },
 });
 
+export const { resetAuthState } = authSlice.actions;
 export const authReducer = authSlice.reducer;
 
 const persistConfig = {
