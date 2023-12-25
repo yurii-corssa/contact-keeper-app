@@ -41,7 +41,7 @@ const Background = () => {
         ...defaultAnimation,
         left: '0',
         width: !isDesktop ? '100%' : '50%',
-        height: !isDesktop ? '50vh' : '100vh',
+        height: !isDesktop ? '80vh' : '100vh',
       });
     }
   }, [controls, isAuthPage, isContactsPage, isDesktop, isHomePage]);

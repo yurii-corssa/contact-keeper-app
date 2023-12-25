@@ -11,6 +11,7 @@ import NoContactNotice from './NoContactNotice';
 import NoFilterContactNotice from './NoFilterContactNotice';
 import ModalWindow from 'components/ModalWindow';
 import { EditContactForm } from './EditContactForm';
+import { useDevice } from 'deviceContext';
 
 const ContactsList = () => {
   const [id, setId] = useState('');
@@ -21,6 +22,8 @@ const ContactsList = () => {
   const filteredContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { deviceType } = useDevice();
+  const isDesktop = deviceType === 'desktop';
 
   useEffect(() => {
     dispatch(getContactsThunk());
@@ -37,10 +40,9 @@ const ContactsList = () => {
     <>
       <Flex
         direction="column"
-        w="100%"
-        h={{ base: 'calc(100vh - 148px)', lg: '100vh' }}
-        maxW="570px"
-        pt={{ base: '0', lg: '42px' }}
+        w={!isDesktop ? '100%' : '50%'}
+        h={!isDesktop ? 'calc(100vh - 102px)' : '100vh'}
+        pt={!isDesktop ? '0' : '42px'}
       >
         <Box height="100%" overflowY="auto">
           {contacts.length === 0 ? (

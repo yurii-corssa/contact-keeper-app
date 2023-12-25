@@ -1,30 +1,70 @@
+import { useDevice } from 'deviceContext';
 import { AddContactForm } from './AddContactForm';
 import { ContactFilter } from './ContactFilter';
 import { Flex, Heading, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
 const ContactTools = () => {
+  const { deviceType } = useDevice();
+  const isDesktop = deviceType === 'desktop';
+
+  const createTextAnimation = delay => ({
+    initial: { opacity: 0, y: -20 },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { duration: 0.5, ease: [0.05, 0.08, 0.24, 0.96], delay },
+        opacity: { duration: 0.3, ease: 'easeIn', delay },
+      },
+    },
+  });
+
   return (
     <Flex
       direction="column"
-      bgGradient="linear(-20deg, #2b5876 0%, #4e4376 100%)"
-      p={14}
+      padding={!isDesktop ? '20px 56px' : '56px'}
       color="#fff"
-      w="100%"
-      height={{ base: '100%', lg: '100vh' }}
-      justify="center"
+      w={!isDesktop ? '100%' : '50%'}
+      h={!isDesktop ? '80vh' : '100vh'}
+      justify={!isDesktop ? 'space-between' : 'center'}
       alignItems="center"
-      shadow="md"
     >
-      <Heading as="h1" size="2xl" paddingY="5">
-        Contact Keeper
-      </Heading>
-      <Text paddingY="5" textAlign="center" fontSize="lg" maxW="380px">
-        Add your contacts and keep them organized in one place. Get started now!
-      </Text>
+      <motion.div {...createTextAnimation(0.1)}>
+        <Heading
+          as="h1"
+          size={!isDesktop ? 'xl' : '2xl'}
+          paddingY={!isDesktop ? '2' : '5'}
+        >
+          Contact Keeper
+        </Heading>
+      </motion.div>
+
+      <motion.div {...createTextAnimation(0.2)}>
+        <Text
+          paddingY={!isDesktop ? '2' : '5'}
+          textAlign="center"
+          fontSize={!isDesktop ? 'md' : 'lg'}
+          maxW="380px"
+        >
+          Add your contacts and keep them organized in one place. Get started
+          now!
+        </Text>
+      </motion.div>
+
       <AddContactForm />
-      <Text paddingY="5" textAlign="center" fontSize="md" maxW="380px">
-        Too many contacts? Just start typing a name and let the magic happen!
-      </Text>
+
+      <motion.div {...createTextAnimation(0.5)}>
+        <Text
+          paddingY={!isDesktop ? '2' : '5'}
+          textAlign="center"
+          fontSize={!isDesktop ? 'sm' : 'md'}
+          maxW="380px"
+        >
+          Too many contacts? Just start typing a name and let the magic happen!
+        </Text>
+      </motion.div>
+
       <ContactFilter />
     </Flex>
   );
