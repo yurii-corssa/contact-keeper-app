@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contacts/contacts-selectors';
+import {
+  selectContacts,
+  selectIsLoadingContacts,
+} from 'redux/contacts/contacts-selectors';
 import { normalizeStr } from 'utils/normalizeStr';
 import { addContactThunk } from 'redux/contacts/contacts-operations';
 import { Form, Formik } from 'formik';
-import { Button, Flex, Stack, useToast } from '@chakra-ui/react';
+import { Button, Flex, Spinner, Stack, useToast } from '@chakra-ui/react';
 import ContactNameInput from 'components/Inputs/ContactNameInput';
 import ContactNumberInput from 'components/Inputs/ContactNumberInput';
 import { useDevice } from 'deviceContext';
 import { motion } from 'framer-motion';
 
 export const AddContactForm = () => {
+  const isLoading = useSelector(selectIsLoadingContacts);
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   const toast = useToast();
@@ -74,8 +78,9 @@ export const AddContactForm = () => {
                 isLoading={props.isSubmitting}
                 type="submit"
                 w="100%"
+                disabled={isLoading}
               >
-                Add contact
+                {isLoading ? <Spinner /> : 'Add contact'}
               </Button>
             </motion.div>
           </Stack>

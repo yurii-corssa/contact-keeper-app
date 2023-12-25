@@ -43,9 +43,8 @@ export const ContactItems = ({ handleOpenModal }) => {
     contactDelayAnimation = contactDelayAnimation + 0.05;
 
     return (
-      <motion.div {...createContactAnimation(contactDelayAnimation)}>
+      <motion.div key={id} {...createContactAnimation(contactDelayAnimation)}>
         <Flex
-          key={id}
           alignItems="center"
           paddingX="1rem"
           paddingY="0.5rem"

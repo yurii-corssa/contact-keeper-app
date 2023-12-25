@@ -12,11 +12,13 @@ const initialState = {
   user: { username: null, email: null },
   token: null,
   error: null,
+  isLoading: false,
   isRefreshing: false,
 };
 
 const handlePending = state => {
   state.isRefreshing = true;
+  state.isLoading = true;
   state.error = null;
 };
 
@@ -24,11 +26,13 @@ const handleFulfilled = (state, { payload }) => {
   state.user = payload.user;
   state.token = payload.token;
   state.isRefreshing = false;
+  state.isLoading = false;
 };
 
-const handleRejected = (state, { payload }) => {
+const handleRejected = (state, { error }) => {
   state.isRefreshing = false;
-  state.error = payload;
+  state.isLoading = false;
+  state.error = error.message;
 };
 
 const authSlice = createSlice({
@@ -43,6 +47,7 @@ const authSlice = createSlice({
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authRegister.fulfilled, handleFulfilled)
       .addCase(authLogin.pending, state => {
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(authLogin.rejected, handleRejected)
@@ -53,9 +58,16 @@ const authSlice = createSlice({
         state.user = { name: null, email: null };
         state.token = null;
         state.isRefreshing = false;
+        state.isLoading = false;
       })
-      .addCase(authRefresh.pending, handlePending)
-      .addCase(authRefresh.rejected, handleRejected)
+      .addCase(authRefresh.pending, state => {
+        state.isRefreshing = true;
+        state.error = null;
+      })
+      .addCase(authRefresh.rejected, (state, { error }) => {
+        state.isRefreshing = false;
+        state.error = error.message;
+      })
       .addCase(authRefresh.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.isRefreshing = false;

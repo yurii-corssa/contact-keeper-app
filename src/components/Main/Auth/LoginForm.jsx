@@ -3,15 +3,17 @@ import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authLogin } from 'redux/auth/auth-operations';
-import { selectAuthError } from 'redux/auth/auth-selectors';
+import { selectAuthError, selectIsLoading } from 'redux/auth/auth-selectors';
 import { Button, Flex, Heading, Stack } from '@chakra-ui/react';
 import AuthEmailInput from 'components/Inputs/AuthEmailInput';
 import AuthPasswordInput from 'components/Inputs/AuthPasswordInput';
 import { motion } from 'framer-motion';
 import { useDevice } from 'deviceContext';
+import { Spinner } from '@chakra-ui/react';
 
 const LoginForm = () => {
   const authError = useSelector(selectAuthError);
+  const isLoading = useSelector(selectIsLoading);
   const { deviceType } = useDevice();
 
   const dispatch = useDispatch();
@@ -91,8 +93,9 @@ const LoginForm = () => {
                   colorScheme="blue"
                   isLoading={props.isSubmitting}
                   type="submit"
+                  disabled={isLoading}
                 >
-                  Login
+                  {isLoading ? <Spinner /> : 'Login'}
                 </Button>
                 <Link to="/auth/sign-up">Sign Up</Link>
               </Flex>
