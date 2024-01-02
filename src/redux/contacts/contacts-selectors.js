@@ -3,6 +3,7 @@ import { normalizeStr } from 'utils/normalizeStr';
 
 export const selectContacts = state => state.contacts.items;
 export const selectFilter = state => state.filter;
+export const selectIsLoadingContacts = state => state.contacts.isLoading;
 
 export const selectVisibleContacts = createSelector(
   [selectContacts, selectFilter],
