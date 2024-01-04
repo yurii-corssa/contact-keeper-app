@@ -51,6 +51,7 @@ To get a local copy up and running, follow these simple steps.
 ### Prerequisites
 
 - npm
+
   ```sh
   npm install npm@latest -g
   ```
