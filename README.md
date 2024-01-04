@@ -1,113 +1,96 @@
-# React homework template
+# Phonebook App
 
-Этот проект был создан при помощи
-[Create React App](https://github.com/facebook/create-react-app). Для знакомства
-и настройки дополнительных возможностей
-[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
+## Overview
 
-## Создание репозитория по шаблону
+The Phonebook App is a full-stack application that allows users to register, log
+in, and manage their personal contacts. It features a clean and user-friendly
+interface for easy management of contacts, including functionalities for adding,
+editing, deleting, and filtering contacts.
 
-Используй этот репозиторий организации GoIT как шаблон для создания репозитория
-своего проекта. Для этого нажми на кнопку `«Use this template»` и выбери опцию
-`«Create a new repository»`, как показано на изображении.
+![Phonebook App Main Interface](./assets/main-interface.gif)
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+## Features
 
-На следующем шаге откроется страница создания нового репозитория. Заполни поле
-его имени, убедись что репозиторий публичный, после чего нажми кнопку
-`«Create repository from template»`.
+- User Authentication (Register/Login)
+- Contact Management (Add/Edit/Delete)
+- Contact Filtering
+- Responsive Design
+- Real-time Updates
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+## Technologies Used
 
-После того как репозиторий будет создан, необходимо перейти в настройки
-созданного репозитория на вкладку `Settings` > `Actions` > `General` как
-показано на изображении.
+- **Frontend:**
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+  - React.js: Main framework for UI
+  - Redux: For state management
+  - Redux Persist: For persisting Redux state
+  - React Router: For in-app navigation
+  - Formik: For form handling
+  - Chakra UI: For component styling
+  - Framer Motion: For animations
+  - Axios: For HTTP requests
 
-Проскролив страницу до самого конца, в секции `«Workflow permissions»` выбери
-опцию `«Read and write permissions»` и поставь галочку в чекбоксе. Это
-необходимо для автоматизации процесса деплоя проекта.
+- **Backend:**
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+  - Node.js: Server-side platform
+  - Express.js: Framework for Node.js
+  - MongoDB: Database
+  - Backend Repository:
+    [Contacts Manager API](https://github.com/yurii-corssa/contacts-manager-api)
 
-Теперь у тебя есть личный репозиторий проекта, со структурой файлов и папок
-репозитория-шаблона. Далее работай с ним как с любым другим личным репозиторием,
-клонируй его себе на компьютер, пиши код, делай коммиты и отправляй их на
-GitHub.
+- **Additional Tools:**
+  - ESLint: For static code analysis
+  - Prettier: For code formatting
+  - Git: For version control
+  - GitHub Actions: For CI/CD
 
-## Подготовка к работе
+## Getting Started
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Установи базовые зависимости проекта командой `npm install`.
-3. Запусти режим разработки, выполнив команду `npm start`.
-4. Перейди в браузере по адресу [http://localhost:3000](http://localhost:3000).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
+To get a local copy up and running, follow these simple steps.
 
-## Деплой
+### Prerequisites
 
-Продакшн версия проекта будет автоматически проходить линтинг, собираться и
-деплоиться на GitHub Pages, в ветку `gh-pages`, каждый раз когда обновляется
-ветка `main`. Например, после прямого пуша или принятого пул-реквеста. Для этого
-необходимо в файле `package.json` отредактировать поле `homepage`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
+- npm
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+  ```sh
+  npm install npm@latest -g
+  ```
 
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
+### Installation
 
-![GitHub Pages settings](./assets/repo-settings.png)
+1. Clone the repo
 
-### Статус деплоя
+   ```sh
+   git clone https://github.com/yurii-corssa/goit-react-hw-08-phonebook.git
+   ```
 
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
+2. Install NPM packages
 
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
+   ```sh
+   npm install
+   ```
 
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
+3. Start the application
+   ```sh
+   npm start
+   ```
 
-![Deployment status](./assets/deploy-status.png)
+## Usage
 
-### Живая страница
+After logging in, users can manage their contacts. The application provides
+functionalities to:
 
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+- Add a new contact
+- Edit an existing contact
+- Delete a contact
+- Filter contacts
+- View a list of all contacts
 
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` в файле `package.json`.
+![Contact Management Interface](./assets/management-interface.gif)
 
-### Маршрутизация
+## Contact
 
-Если приложение использует библиотеку `react-router-dom` для маршрутизации,
-необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
-`basename` точное название твоего репозитория. Слеш в начале строки обязателен.
+Yurii Corssa - [yurii.corssa@gmail.com](yurii.corssa@gmail.com)
 
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
-
-## Как это работает
-
-![How it works](./assets/how-it-works.png)
-
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит линтинг и сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+Project Link:
+[https://github.com/yurii-corssa/goit-react-hw-08-phonebook](https://github.com/yurii-corssa/goit-react-hw-08-phonebook)
