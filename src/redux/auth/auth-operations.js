@@ -21,7 +21,7 @@ const createNotificationTimer = () => {
       'Please note that this project is hosted on a free server. Sometimes, requests may take longer than usual. Thank you for your patience.',
       'Okay'
     );
-  }, 100);
+  }, 5000);
 };
 
 export const authRegister = createAsyncThunk(
