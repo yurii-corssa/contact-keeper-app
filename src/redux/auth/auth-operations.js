@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { resetAuthState } from './auth-slice';
-import { Notify } from 'notiflix';
+import { Report } from 'notiflix';
 
 axios.defaults.baseURL = 'https://contacts-backend-ivx4.onrender.com';
 // axios.defaults.baseURL = 'http://localhost:4000';
@@ -16,10 +16,12 @@ const clearAuthHeader = () => {
 
 const createNotificationTimer = () => {
   return setTimeout(() => {
-    Notify.info(
-      'Please note that this project is hosted on a free server. Sometimes, requests may take longer than usual. Thank you for your patience.'
+    Report.info(
+      'Server Delay',
+      'Please note that this project is hosted on a free server. Sometimes, requests may take longer than usual. Thank you for your patience.',
+      'Okay'
     );
-  }, 5000);
+  }, 100);
 };
 
 export const authRegister = createAsyncThunk(
