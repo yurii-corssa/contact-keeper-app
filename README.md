@@ -1,13 +1,13 @@
-# Phonebook App
+# Contact Keeper App
 
 ## Overview
 
-The Phonebook App is a full-stack application that allows users to register, log
-in, and manage their personal contacts. It features a clean and user-friendly
-interface for easy management of contacts, including functionalities for adding,
-editing, deleting, and filtering contacts.
+The Contact Keeper App is a full-stack application that allows users to
+register, log in, and manage their personal contacts. It features a clean and
+user-friendly interface for easy management of contacts, including
+functionalities for adding, editing, deleting, and filtering contacts.
 
-![Phonebook App Main Interface](./assets/main-interface.gif)
+![Contact Keeper App Main Interface](./assets/main-interface.gif)
 
 ## Features
 
@@ -48,20 +48,12 @@ editing, deleting, and filtering contacts.
 
 To get a local copy up and running, follow these simple steps.
 
-### Prerequisites
-
-- npm
-
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ### Installation
 
 1. Clone the repo
 
    ```sh
-   git clone https://github.com/yurii-corssa/goit-react-hw-08-phonebook.git
+   git clone https://github.com/yurii-corssa/contact-keeper-app.git
    ```
 
 2. Install NPM packages
@@ -93,4 +85,4 @@ functionalities to:
 Yurii Corssa - [yurii.corssa@gmail.com](yurii.corssa@gmail.com)
 
 Project Link:
-[https://github.com/yurii-corssa/goit-react-hw-08-phonebook](https://github.com/yurii-corssa/goit-react-hw-08-phonebook)
+[https://github.com/yurii-corssa/contact-keeper-app](https://github.com/yurii-corssa/contact-keeper-app)

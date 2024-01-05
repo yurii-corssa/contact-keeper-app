@@ -1,8 +1,8 @@
 {
-  "name": "react-homework-template",
+  "name": "contact-keeper-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yurii-corssa.github.io/goit-react-hw-08-phonebook/",
+  "homepage": "https://yurii-corssa.github.io/contact-keeper-app/",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.1",
