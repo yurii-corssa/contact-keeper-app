@@ -38,6 +38,12 @@ export const authRegister = createAsyncThunk(
       return res.data;
     } catch (e) {
       clearTimeout(timerId);
+
+      if (e.request.status === 409) {
+        const message = 'Email already in use. Please try another or log in.';
+        return thunkAPI.rejectWithValue(message);
+      }
+
       return thunkAPI.rejectWithValue(e.message);
     }
   }

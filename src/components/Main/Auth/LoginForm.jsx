@@ -84,12 +84,13 @@ const LoginForm = () => {
             <motion.div {...createFormAnimation(0.75)}>
               <AuthPasswordInput validatePassword={validatePassword} />
             </motion.div>
-            <motion.div {...createFormAnimation(0.9)}>
+            <motion.div {...createFormAnimation(0.5)}>
               {authError && <AlertError errorMessage={authError} />}
             </motion.div>
             <motion.div {...createFormAnimation(0.9)}>
               <Flex justifyContent="center" alignItems="center" gap="10" pt="5">
                 <Button
+                  minW="90px"
                   colorScheme="blue"
                   isLoading={props.isSubmitting}
                   type="submit"
