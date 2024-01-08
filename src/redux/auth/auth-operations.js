@@ -121,3 +121,17 @@ export const authRefresh = createAsyncThunk(
     }
   }
 );
+
+export const verifyUser = token => {
+  const res = axios.get(`/api/auth/verify/${token}`);
+  return res;
+};
+
+export const resendVerifyEmail = email => {
+  try {
+    const res = axios.post(`/api/auth/verify`, email);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};

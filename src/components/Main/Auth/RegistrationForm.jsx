@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authRegister } from 'redux/auth/auth-operations';
 import { Button, Flex, Heading, Spinner, Stack } from '@chakra-ui/react';
 import AuthPasswordInput from 'components/Inputs/AuthPasswordInput';
@@ -17,6 +17,7 @@ const RegistrationForm = () => {
   const authError = useSelector(selectAuthError);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialValues = {
     username: '',
@@ -61,8 +62,13 @@ const RegistrationForm = () => {
     }
   };
 
-  const handleSubmit = (value, actions) => {
-    dispatch(authRegister(value));
+  const handleSubmit = async (value, actions) => {
+    const res = await dispatch(authRegister(value));
+
+    if (res.type === 'auth/register/fulfilled') {
+      navigate('/confirmation');
+    }
+
     actions.setSubmitting(false);
   };
 

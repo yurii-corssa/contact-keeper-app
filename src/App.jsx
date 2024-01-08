@@ -10,11 +10,19 @@ import RestrictedRoute from 'components/RestrictedRoute';
 import PrivateRoute from 'components/PrivateRoute';
 import LoadSpinner from 'components/LoadSpinner';
 import { useDevice } from 'deviceContext';
+import ResendEmail from 'components/Main/Confirmation/ResendEmail';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AuthPage = lazy(() => import('./pages/AuthPage'));
 const ContactsPage = lazy(() => import('./pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const ConfirmationPage = lazy(() => import('./pages/ConfirmationPage'));
+const ConfirmationTitle = lazy(() =>
+  import('components/Main/Confirmation/ConfirmationTitle')
+);
+const VerificationConfirm = lazy(() =>
+  import('components/Main/Confirmation/VerificationConfirm')
+);
 
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -44,6 +52,17 @@ export const App = () => {
           path="/contacts"
           element={<PrivateRoute component={ContactsPage} redirectTo="/" />}
         />
+        <Route
+          path="/confirmation"
+          element={
+            <RestrictedRoute component={ConfirmationPage} redirectTo="/" />
+          }
+        >
+          <Route index element={<ConfirmationTitle />} />
+          <Route path="resend" element={<ResendEmail />} />
+          <Route path="verification/:token" element={<VerificationConfirm />} />
+        </Route>
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

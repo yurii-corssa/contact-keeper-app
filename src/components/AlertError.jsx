@@ -7,8 +7,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-const AlertError = ({ errorMessage }) => {
+const AlertError = ({ errorMessage, onCloseCallback }) => {
   const { isOpen: isVisible, onClose } = useDisclosure({ defaultIsOpen: true });
+
+  const handleClose = () => {
+    onClose();
+
+    if (onCloseCallback) {
+      onCloseCallback();
+    }
+  };
 
   return (
     isVisible && (
@@ -22,7 +30,7 @@ const AlertError = ({ errorMessage }) => {
           position="relative"
           right={-1}
           top={-1}
-          onClick={onClose}
+          onClick={handleClose}
         />
       </Alert>
     )
