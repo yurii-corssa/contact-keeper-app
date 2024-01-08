@@ -11,38 +11,51 @@ functionalities for adding, editing, deleting, and filtering contacts.
 
 ## Features
 
-- User Authentication (Register/Login)
-- Contact Management (Add/Edit/Delete)
-- Contact Filtering
-- Responsive Design
-- Real-time Updates
+- User Authentication - Secure login and registration system.
+- Contact Management - Add, edit, delete, filtered and view personal contacts.
+- Real-time Data - Instantly reflects changes in the contact list.
+- Responsive Design - Compatible with various devices and screen sizes.
+- Email Verification - Ensures verified user registration.
 
 ## Technologies Used
 
 - **Frontend:**
 
-  - React.js: Main framework for UI
-  - Redux: For state management
-  - Redux Persist: For persisting Redux state
-  - React Router: For in-app navigation
-  - Formik: For form handling
-  - Chakra UI: For component styling
-  - Framer Motion: For animations
-  - Axios: For HTTP requests
+  - **React.js** - Main framework for UI
+  - **Redux** - For state management
+  - **Redux Persist** - For persisting Redux state
+  - **React Router** - For in-app navigation
+  - **Formik** - For form handling
+  - **Chakra UI** - For component styling
+  - **Framer Motion** - For animations
+  - **Axios** - For HTTP requests
 
 - **Backend:**
 
-  - Node.js: Server-side platform
-  - Express.js: Framework for Node.js
-  - MongoDB: Database
-  - Backend Repository:
+  - **Node.js** - As the runtime environment for the application.
+  - **Express.js** - Used to build the web server and manage routes.
+  - **MongoDB with Mongoose** - For database management. Mongoose is used for
+    schema definition and data validation.
+  - **JSON Web Tokens (JWT)** - For secure authentication.
+  - **Joi** - For request validation, ensuring that incoming requests follow the
+    expected format.
+  - **Nodemailer** - For sending out email verifications to users upon
+    registration.
+  - **Bcrypt** - For hashing and securing user passwords.
+  - **Morgan** - As an HTTP request logger middleware for Node.js.
+  - **Dotenv** - To manage environment variables.
+  - **Cross-env** - To set and use environment variables across different
+    platforms.
+  - **Jimp** - For image processing tasks.
+  - **Multer** - For handling multipart/form-data, primarily used for uploading
+    files.
     [Contacts Manager API](https://github.com/yurii-corssa/contacts-manager-api)
 
 - **Additional Tools:**
-  - ESLint: For static code analysis
-  - Prettier: For code formatting
-  - Git: For version control
-  - GitHub Actions: For CI/CD
+  - **ESLint** - For static code analysis
+  - **Prettier** - For code formatting
+  - **Git** - For version control
+  - **GitHub Actions** - For CI/CD
 
 ## Getting Started
 
@@ -79,10 +92,3 @@ functionalities to:
 - View a list of all contacts
 
 ![Contact Management Interface](./assets/management-interface.gif)
-
-## Contact
-
-Yurii Corssa - [yurii.corssa@gmail.com](yurii.corssa@gmail.com)
-
-Project Link:
-[https://github.com/yurii-corssa/contact-keeper-app](https://github.com/yurii-corssa/contact-keeper-app)
