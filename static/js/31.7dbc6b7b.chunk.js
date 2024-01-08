@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcontact_keeper_app=self.webpackChunkcontact_keeper_app||[]).push([[31],{6031:function(e,n,t){t.r(n);var c=t(6582),a=t(7689),p=t(3329);n.default=function(){return(0,p.jsx)(c.k,{alignItems:"center",justifyContent:"space-evenly",children:(0,p.jsx)(a.j3,{})})}}}]);
+//# sourceMappingURL=31.7dbc6b7b.chunk.js.map
