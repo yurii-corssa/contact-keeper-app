@@ -38,6 +38,12 @@ export const authRegister = createAsyncThunk(
       return res.data;
     } catch (e) {
       clearTimeout(timerId);
+
+      if (e.request.status === 409) {
+        const message = 'Email already in use. Please try another or log in.';
+        return thunkAPI.rejectWithValue(message);
+      }
+
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -115,3 +121,17 @@ export const authRefresh = createAsyncThunk(
     }
   }
 );
+
+export const verifyUser = token => {
+  const res = axios.get(`/api/auth/verify/${token}`);
+  return res;
+};
+
+export const resendVerifyEmail = email => {
+  try {
+    const res = axios.post(`/api/auth/verify`, email);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};

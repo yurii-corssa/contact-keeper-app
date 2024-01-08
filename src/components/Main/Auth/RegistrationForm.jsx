@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authRegister } from 'redux/auth/auth-operations';
 import { Button, Flex, Heading, Spinner, Stack } from '@chakra-ui/react';
 import AuthPasswordInput from 'components/Inputs/AuthPasswordInput';
@@ -8,13 +8,16 @@ import AuthEmailInput from 'components/Inputs/AuthEmailInput';
 import AuthNameInput from 'components/Inputs/AuthNameInput';
 import { useDevice } from 'deviceContext';
 import { motion } from 'framer-motion';
-import { selectIsLoading } from 'redux/auth/auth-selectors';
+import { selectAuthError, selectIsLoading } from 'redux/auth/auth-selectors';
+import AlertError from 'components/AlertError';
 
 const RegistrationForm = () => {
   const { deviceType } = useDevice();
   const isLoading = useSelector(selectIsLoading);
+  const authError = useSelector(selectAuthError);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialValues = {
     username: '',
@@ -59,8 +62,13 @@ const RegistrationForm = () => {
     }
   };
 
-  const handleSubmit = (value, actions) => {
-    dispatch(authRegister(value));
+  const handleSubmit = async (value, actions) => {
+    const res = await dispatch(authRegister(value));
+
+    if (res.type === 'auth/register/fulfilled') {
+      navigate('/confirmation');
+    }
+
     actions.setSubmitting(false);
   };
 
@@ -111,9 +119,13 @@ const RegistrationForm = () => {
             <motion.div {...createFormAnimation(0.9)}>
               <AuthPasswordInput validatePassword={validatePassword} />
             </motion.div>
+            <motion.div {...createFormAnimation(0.5)}>
+              {authError && <AlertError errorMessage={authError} />}
+            </motion.div>
             <motion.div {...createFormAnimation(0.9)}>
               <Flex justifyContent="center" alignItems="center" gap="10" pt="5">
                 <Button
+                  minW="90px"
                   colorScheme="blue"
                   isLoading={props.isSubmitting}
                   type="submit"

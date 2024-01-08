@@ -1,39 +1,26 @@
+import { Button } from '@chakra-ui/button';
+import { Flex, Heading, Stack } from '@chakra-ui/layout';
 import AlertError from 'components/AlertError';
-import { Form, Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { authLogin } from 'redux/auth/auth-operations';
-import { selectAuthError, selectIsLoading } from 'redux/auth/auth-selectors';
-import { Button, Flex, Heading, Stack } from '@chakra-ui/react';
 import AuthEmailInput from 'components/Inputs/AuthEmailInput';
-import AuthPasswordInput from 'components/Inputs/AuthPasswordInput';
-import { motion } from 'framer-motion';
 import { useDevice } from 'deviceContext';
-import { Spinner } from '@chakra-ui/react';
+import { Form, Formik } from 'formik';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { resendVerifyEmail } from 'redux/auth/auth-operations';
 
-const LoginForm = () => {
-  const authError = useSelector(selectAuthError);
-  const isLoading = useSelector(selectIsLoading);
+const ResendEmail = () => {
+  const [sendError, setSendError] = useState(null);
+
   const { deviceType } = useDevice();
-
-  const dispatch = useDispatch();
+  const isDesktop = deviceType === 'desktop';
+  const navigate = useNavigate();
 
   const validateEmail = value => {
     if (!value) {
       return 'Email is required';
     }
   };
-  const validatePassword = value => {
-    if (!value) {
-      return 'Password is required';
-    }
-  };
-
-  const handleSubmit = (value, actions) => {
-    dispatch(authLogin(value));
-    actions.setSubmitting(false);
-  };
-
   const createTextAnimation = delay => ({
     initial: { opacity: 0, y: -20 },
     animate: {
@@ -56,37 +43,49 @@ const LoginForm = () => {
     },
   });
 
+  const handleSubmit = async (value, actions) => {
+    try {
+      await resendVerifyEmail(value);
+
+      navigate('/confirmation');
+    } catch (error) {
+      setSendError(error.response.data.message);
+    }
+
+    actions.setSubmitting(false);
+  };
+
   return (
     <Flex
       position="relative"
       direction="column"
       p={14}
-      justify="center"
-      w={deviceType !== 'desktop' ? '100%' : '50%'}
+      pt="150px"
+      h="100vh"
+      w={!isDesktop ? '100%' : '50%'}
+      textAlign="center"
     >
       <motion.div {...createTextAnimation(0.5)}>
         <Heading size="xl" mb={10}>
-          Sign in
+          Resend Email
         </Heading>
       </motion.div>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        onSubmit={handleSubmit}
-      >
+      <Formik initialValues={{ email: '' }} onSubmit={handleSubmit}>
         {props => (
           <Stack as={Form} gap={3}>
             <motion.div {...createFormAnimation(0.7)}>
               <AuthEmailInput validateEmail={validateEmail} />
             </motion.div>
-            <motion.div {...createFormAnimation(0.75)}>
-              <AuthPasswordInput validatePassword={validatePassword} />
-            </motion.div>
+
             <motion.div {...createFormAnimation(0.5)}>
-              {authError && <AlertError errorMessage={authError} />}
+              {sendError && (
+                <AlertError
+                  errorMessage={sendError}
+                  onCloseCallback={() => setSendError(null)}
+                />
+              )}
             </motion.div>
+
             <motion.div {...createFormAnimation(0.9)}>
               <Flex justifyContent="center" alignItems="center" gap="10" pt="5">
                 <Button
@@ -94,11 +93,9 @@ const LoginForm = () => {
                   colorScheme="blue"
                   isLoading={props.isSubmitting}
                   type="submit"
-                  disabled={isLoading}
                 >
-                  {isLoading ? <Spinner /> : 'Log In'}
+                  Resend
                 </Button>
-                <Link to="/auth/sign-up">Sign Up</Link>
               </Flex>
             </motion.div>
           </Stack>
@@ -108,4 +105,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ResendEmail;

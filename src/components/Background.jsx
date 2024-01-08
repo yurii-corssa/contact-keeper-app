@@ -13,6 +13,7 @@ const Background = () => {
   const isHomePage = location.pathname === '/';
   const isAuthPage = location.pathname.includes('/auth');
   const isContactsPage = location.pathname.includes('/contacts');
+  const isConfirmationPage = location.pathname.includes('/confirmation');
 
   useEffect(() => {
     const defaultAnimation = {
@@ -23,7 +24,7 @@ const Background = () => {
     if (isHomePage) {
       controls.start({
         ...defaultAnimation,
-        left: '0%',
+        left: '0',
         width: '100%',
         height: '100vh',
       });
@@ -44,7 +45,22 @@ const Background = () => {
         height: !isDesktop ? '80vh' : '100vh',
       });
     }
-  }, [controls, isAuthPage, isContactsPage, isDesktop, isHomePage]);
+    if (isConfirmationPage) {
+      controls.start({
+        ...defaultAnimation,
+        left: '100%',
+        width: '0',
+        // height: '100vh'
+      });
+    }
+  }, [
+    controls,
+    isAuthPage,
+    isConfirmationPage,
+    isContactsPage,
+    isDesktop,
+    isHomePage,
+  ]);
 
   const bgAnimation = {
     initial: {

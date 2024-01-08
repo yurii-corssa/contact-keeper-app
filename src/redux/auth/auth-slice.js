@@ -17,7 +17,6 @@ const initialState = {
 };
 
 const handlePending = state => {
-  state.isRefreshing = true;
   state.isLoading = true;
   state.error = null;
 };
@@ -29,10 +28,10 @@ const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
 };
 
-const handleRejected = (state, { error }) => {
+const handleRejected = (state, { payload }) => {
   state.isRefreshing = false;
   state.isLoading = false;
-  state.error = error.message;
+  state.error = payload;
 };
 
 const authSlice = createSlice({
@@ -46,10 +45,7 @@ const authSlice = createSlice({
       .addCase(authRegister.pending, handlePending)
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authRegister.fulfilled, handleFulfilled)
-      .addCase(authLogin.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(authLogin.pending, handlePending)
       .addCase(authLogin.rejected, handleRejected)
       .addCase(authLogin.fulfilled, handleFulfilled)
       .addCase(authLogout.pending, handlePending)
