@@ -21,7 +21,7 @@ const BurgerMenu = () => {
   const location = useLocation();
 
   const bgColor = useColorModeValue('#f4f4f4');
-
+  const isConfirmationPage = location.pathname.includes('/confirmation');
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const getTabIndex = path => {
@@ -48,10 +48,16 @@ const BurgerMenu = () => {
         onClick={toggleMenu}
         variant="ghost"
         size="lg"
-        icon={<HamburgerIcon fontSize="3xl" color="white" />}
+        icon={
+          <HamburgerIcon
+            fontSize="3xl"
+            color={isConfirmationPage ? 'black' : 'white'}
+          />
+        }
         position="fixed"
         top="1"
         right="1"
+        zIndex="1"
       />
       <Slide direction="right" in={isOpen} style={{ zIndex: 10 }}>
         <Box height="100vh" p="40px" bg={bgColor} shadow="md">

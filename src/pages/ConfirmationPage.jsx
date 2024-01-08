@@ -1,11 +1,11 @@
-import { Suspense } from 'react';
+import { Flex } from '@chakra-ui/layout';
 import { Outlet } from 'react-router';
 
 const ConfirmationPage = () => {
   return (
-    <Suspense>
+    <Flex alignItems="center" justifyContent="space-evenly">
       <Outlet />
-    </Suspense>
+    </Flex>
   );
 };
 

@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/button';
 import { Flex, Heading, Stack } from '@chakra-ui/layout';
 import AlertError from 'components/AlertError';
 import AuthEmailInput from 'components/Inputs/AuthEmailInput';
+import { useDevice } from 'deviceContext';
 import { Form, Formik } from 'formik';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -11,6 +12,8 @@ import { resendVerifyEmail } from 'redux/auth/auth-operations';
 const ResendEmail = () => {
   const [sendError, setSendError] = useState(null);
 
+  const { deviceType } = useDevice();
+  const isDesktop = deviceType === 'desktop';
   const navigate = useNavigate();
 
   const validateEmail = value => {
@@ -47,7 +50,6 @@ const ResendEmail = () => {
       navigate('/confirmation');
     } catch (error) {
       setSendError(error.response.data.message);
-      //   actions.setFieldError('email', error.response.data.message);
     }
 
     actions.setSubmitting(false);
@@ -58,8 +60,10 @@ const ResendEmail = () => {
       position="relative"
       direction="column"
       p={14}
-      justify="center"
-      //   w={deviceType !== 'desktop' ? '100%' : '50%'}
+      pt="150px"
+      h="100vh"
+      w={!isDesktop ? '100%' : '50%'}
+      textAlign="center"
     >
       <motion.div {...createTextAnimation(0.5)}>
         <Heading size="xl" mb={10}>

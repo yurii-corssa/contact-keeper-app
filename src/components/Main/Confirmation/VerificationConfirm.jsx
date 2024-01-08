@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { Flex, Heading, Text } from '@chakra-ui/layout';
 import LoadSpinner from 'components/LoadSpinner';
+import { useDevice } from 'deviceContext';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
@@ -12,6 +13,8 @@ const VerificationConfirm = () => {
   const [confirmedStatus, setConfirmedStatus] = useState('');
 
   const { token } = useParams();
+  const { deviceType } = useDevice();
+  const isDesktop = deviceType === 'desktop';
 
   useEffect(() => {
     verifyUser(token)
@@ -40,9 +43,10 @@ const VerificationConfirm = () => {
     <Flex
       direction="column"
       gap="2"
+      p={14}
       pt="150px"
-      height="100vh"
-      w="100%"
+      h="100vh"
+      w={!isDesktop ? '100%' : '50%'}
       textAlign="center"
     >
       {isLoading ? (
@@ -63,7 +67,7 @@ const VerificationConfirm = () => {
 
           <motion.div {...createTextAnimation(0.4)}>
             <Button as={Link} to="/auth/login" colorScheme="blue">
-              Log in
+              Log In
             </Button>
           </motion.div>
         </>

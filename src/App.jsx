@@ -11,18 +11,14 @@ import PrivateRoute from 'components/PrivateRoute';
 import LoadSpinner from 'components/LoadSpinner';
 import { useDevice } from 'deviceContext';
 import ResendEmail from 'components/Main/Confirmation/ResendEmail';
+import ConfirmationTitle from 'components/Main/Confirmation/ConfirmationTitle';
+import VerificationConfirm from 'components/Main/Confirmation/VerificationConfirm';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AuthPage = lazy(() => import('./pages/AuthPage'));
 const ContactsPage = lazy(() => import('./pages/ContactsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ConfirmationPage = lazy(() => import('./pages/ConfirmationPage'));
-const ConfirmationTitle = lazy(() =>
-  import('components/Main/Confirmation/ConfirmationTitle')
-);
-const VerificationConfirm = lazy(() =>
-  import('components/Main/Confirmation/VerificationConfirm')
-);
 
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);

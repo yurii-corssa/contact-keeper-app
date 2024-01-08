@@ -1,9 +1,13 @@
 import { Button } from '@chakra-ui/button';
 import { Flex, Heading, Text } from '@chakra-ui/layout';
+import { useDevice } from 'deviceContext';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const ConfirmationTitle = () => {
+  const { deviceType } = useDevice();
+  const isDesktop = deviceType === 'desktop';
+
   const createTextAnimation = delay => ({
     initial: { opacity: 0, y: -10 },
     animate: {
@@ -20,9 +24,10 @@ const ConfirmationTitle = () => {
     <Flex
       direction="column"
       gap="2"
+      p={14}
       pt="150px"
-      height="100vh"
-      w="100%"
+      h="100vh"
+      w={!isDesktop ? '100%' : '50%'}
       textAlign="center"
     >
       <motion.div {...createTextAnimation(0.1)}>

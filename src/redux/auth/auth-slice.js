@@ -17,7 +17,6 @@ const initialState = {
 };
 
 const handlePending = state => {
-  state.isRefreshing = true;
   state.isLoading = true;
   state.error = null;
 };
@@ -43,16 +42,10 @@ const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(authRegister.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(authRegister.pending, handlePending)
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authRegister.fulfilled, handleFulfilled)
-      .addCase(authLogin.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(authLogin.pending, handlePending)
       .addCase(authLogin.rejected, handleRejected)
       .addCase(authLogin.fulfilled, handleFulfilled)
       .addCase(authLogout.pending, handlePending)

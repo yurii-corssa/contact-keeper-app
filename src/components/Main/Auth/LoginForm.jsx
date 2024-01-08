@@ -96,7 +96,7 @@ const LoginForm = () => {
                   type="submit"
                   disabled={isLoading}
                 >
-                  {isLoading ? <Spinner /> : 'Login'}
+                  {isLoading ? <Spinner /> : 'Log In'}
                 </Button>
                 <Link to="/auth/sign-up">Sign Up</Link>
               </Flex>
