@@ -3,22 +3,11 @@ import { AddContactForm } from './AddContactForm';
 import { ContactFilter } from './ContactFilter';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { createTextAnimationTop } from 'utils/animations';
 
 const ContactTools = () => {
   const { deviceType } = useDevice();
   const isDesktop = deviceType === 'desktop';
-
-  const createTextAnimation = delay => ({
-    initial: { opacity: 0, y: -20 },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { duration: 0.5, ease: [0.05, 0.08, 0.24, 0.96], delay },
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
 
   return (
     <Flex
@@ -30,7 +19,7 @@ const ContactTools = () => {
       justify={!isDesktop ? 'space-between' : 'center'}
       alignItems="center"
     >
-      <motion.div {...createTextAnimation(0.1)}>
+      <motion.div {...createTextAnimationTop(0.1)}>
         <Heading
           as="h1"
           size={!isDesktop ? 'xl' : '2xl'}
@@ -40,7 +29,7 @@ const ContactTools = () => {
         </Heading>
       </motion.div>
 
-      <motion.div {...createTextAnimation(0.2)}>
+      <motion.div {...createTextAnimationTop(0.2)}>
         <Text
           paddingY={!isDesktop ? '2' : '5'}
           textAlign="center"
@@ -54,7 +43,7 @@ const ContactTools = () => {
 
       <AddContactForm />
 
-      <motion.div {...createTextAnimation(0.5)}>
+      <motion.div {...createTextAnimationTop(0.5)}>
         <Text
           paddingY={!isDesktop ? '2' : '5'}
           textAlign="center"

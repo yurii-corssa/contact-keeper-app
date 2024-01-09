@@ -3,58 +3,25 @@ import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authLogin } from 'redux/auth/auth-operations';
-import { selectAuthError, selectIsLoading } from 'redux/auth/auth-selectors';
+import { selectAuthError } from 'redux/auth/auth-selectors';
 import { Button, Flex, Heading, Stack } from '@chakra-ui/react';
 import AuthEmailInput from 'components/Inputs/AuthEmailInput';
 import AuthPasswordInput from 'components/Inputs/AuthPasswordInput';
 import { motion } from 'framer-motion';
 import { useDevice } from 'deviceContext';
-import { Spinner } from '@chakra-ui/react';
+import { validateEmail, validatePassword } from 'utils/validateSchemas';
+import { createFormAnimation, createTextAnimationTop } from 'utils/animations';
 
 const LoginForm = () => {
   const authError = useSelector(selectAuthError);
-  const isLoading = useSelector(selectIsLoading);
   const { deviceType } = useDevice();
 
   const dispatch = useDispatch();
 
-  const validateEmail = value => {
-    if (!value) {
-      return 'Email is required';
-    }
-  };
-  const validatePassword = value => {
-    if (!value) {
-      return 'Password is required';
-    }
-  };
-
-  const handleSubmit = (value, actions) => {
-    dispatch(authLogin(value));
+  const handleSubmit = async (value, actions) => {
+    await dispatch(authLogin(value));
     actions.setSubmitting(false);
   };
-
-  const createTextAnimation = delay => ({
-    initial: { opacity: 0, y: -20 },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { duration: 0.5, ease: [0.05, 0.08, 0.24, 0.96], delay },
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
-
-  const createFormAnimation = delay => ({
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: {
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
 
   return (
     <Flex
@@ -64,7 +31,7 @@ const LoginForm = () => {
       justify="center"
       w={deviceType !== 'desktop' ? '100%' : '50%'}
     >
-      <motion.div {...createTextAnimation(0.5)}>
+      <motion.div {...createTextAnimationTop(0.5)}>
         <Heading size="xl" mb={10}>
           Sign in
         </Heading>
@@ -92,11 +59,10 @@ const LoginForm = () => {
                 <Button
                   minW="90px"
                   colorScheme="blue"
-                  isLoading={props.isSubmitting}
                   type="submit"
-                  disabled={isLoading}
+                  isLoading={props.isSubmitting}
                 >
-                  {isLoading ? <Spinner /> : 'Log In'}
+                  Log In
                 </Button>
                 <Link to="/auth/sign-up">Sign Up</Link>
               </Flex>

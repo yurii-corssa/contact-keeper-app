@@ -14,7 +14,7 @@ const AuthNameInput = ({ validateName }) => {
   return (
     <Field name="username" validate={validateName}>
       {({ field, form }) => (
-        <FormControl isInvalid={form.errors.name && form.touched.name}>
+        <FormControl isInvalid={form.errors.username && form.touched.username}>
           <FormLabel>Name</FormLabel>
           <InputGroup>
             <InputLeftElement pointerEvents="none">

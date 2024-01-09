@@ -8,14 +8,9 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { Field } from 'formik';
+import { validateNumber } from 'utils/validateSchemas';
 
 const ContactNumberInput = ({ variant }) => {
-  const validateNumber = value => {
-    if (!value) {
-      return 'Phone is required';
-    }
-  };
-
   return (
     <Field name="phone" validate={validateNumber}>
       {({ field, form }) => (

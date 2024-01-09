@@ -6,6 +6,7 @@ import { SearchIcon } from '@chakra-ui/icons';
 import debounce from 'lodash.debounce';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { createFormAnimation } from 'utils/animations';
 import {
   Flex,
   FormControl,
@@ -30,16 +31,6 @@ export const ContactFilter = () => {
       debouncedSetFilter.cancel();
     };
   }, [debouncedSetFilter]);
-
-  const createFormAnimation = delay => ({
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: {
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
 
   return (
     <Flex direction="column" maxW="380px" width="100%">

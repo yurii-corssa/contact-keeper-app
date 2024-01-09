@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { resendVerifyEmail } from 'redux/auth/auth-operations';
+import { createFormAnimation, createTextAnimationTop } from 'utils/animations';
+import { validateEmail } from 'utils/validateSchemas';
 
 const ResendEmail = () => {
   const [sendError, setSendError] = useState(null);
@@ -15,33 +17,6 @@ const ResendEmail = () => {
   const { deviceType } = useDevice();
   const isDesktop = deviceType === 'desktop';
   const navigate = useNavigate();
-
-  const validateEmail = value => {
-    if (!value) {
-      return 'Email is required';
-    }
-  };
-  const createTextAnimation = delay => ({
-    initial: { opacity: 0, y: -20 },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { duration: 0.5, ease: [0.05, 0.08, 0.24, 0.96], delay },
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
-
-  const createFormAnimation = delay => ({
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: {
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
 
   const handleSubmit = async (value, actions) => {
     try {
@@ -65,7 +40,7 @@ const ResendEmail = () => {
       w={!isDesktop ? '100%' : '50%'}
       textAlign="center"
     >
-      <motion.div {...createTextAnimation(0.5)}>
+      <motion.div {...createTextAnimationTop(0.5)}>
         <Heading size="xl" mb={10}>
           Resend Email
         </Heading>

@@ -1,19 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectContacts,
-  selectIsLoadingContacts,
-} from 'redux/contacts/contacts-selectors';
+import { selectContacts } from 'redux/contacts/contacts-selectors';
 import { normalizeStr } from 'utils/normalizeStr';
 import { addContactThunk } from 'redux/contacts/contacts-operations';
 import { Form, Formik } from 'formik';
-import { Button, Flex, Spinner, Stack, useToast } from '@chakra-ui/react';
+import { Button, Flex, Stack, useToast } from '@chakra-ui/react';
 import ContactNameInput from 'components/Inputs/ContactNameInput';
 import ContactNumberInput from 'components/Inputs/ContactNumberInput';
 import { useDevice } from 'deviceContext';
 import { motion } from 'framer-motion';
+import { createFormAnimation } from 'utils/animations';
 
 export const AddContactForm = () => {
-  const isLoading = useSelector(selectIsLoadingContacts);
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   const toast = useToast();
@@ -25,7 +22,7 @@ export const AddContactForm = () => {
   const isContact = value =>
     contacts.find(({ name }) => normalizeStr(name) === normalizeStr(value));
 
-  const handleSubmit = ({ name, phone }, actions) => {
+  const handleSubmit = async ({ name, phone }, actions) => {
     if (isContact(name)) {
       toast({
         title: 'Duplicate Contact',
@@ -38,20 +35,10 @@ export const AddContactForm = () => {
       actions.setSubmitting(false);
       return;
     }
-    dispatch(addContactThunk({ name, phone }));
+    await dispatch(addContactThunk({ name, phone }));
     actions.setSubmitting(false);
     actions.resetForm();
   };
-
-  const createFormAnimation = delay => ({
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: {
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
 
   return (
     <Flex
@@ -78,9 +65,8 @@ export const AddContactForm = () => {
                 isLoading={props.isSubmitting}
                 type="submit"
                 w="100%"
-                disabled={isLoading}
               >
-                {isLoading ? <Spinner /> : 'Add contact'}
+                Add contact
               </Button>
             </motion.div>
           </Stack>
