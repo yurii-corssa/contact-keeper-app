@@ -1,82 +1,44 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { useDevice } from 'deviceContext';
 import { motion, useAnimation } from 'framer-motion';
+import { useCurrentPage } from 'hooks/useCurrentPage';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import {
+  createAuthPageAnimation,
+  createBgAnimation,
+  createConfirmationPageAnimation,
+  createContactsPageAnimation,
+  createHomePageAnimation,
+} from 'utils/animations';
 
 const Background = () => {
   const { deviceType } = useDevice();
-  const location = useLocation();
   const controls = useAnimation();
+  const currentPage = useCurrentPage();
 
   const isDesktop = deviceType === 'desktop';
-  const isHomePage = location.pathname === '/';
-  const isAuthPage = location.pathname.includes('/auth');
-  const isContactsPage = location.pathname.includes('/contacts');
-  const isConfirmationPage = location.pathname.includes('/confirmation');
 
   useEffect(() => {
-    const defaultAnimation = {
-      opacity: 1,
-      transition: { duration: 0.5, ease: [0.05, 0.08, 0.24, 0.96] },
-    };
+    if (currentPage.isHomePage) {
+      createHomePageAnimation(controls);
+    }
 
-    if (isHomePage) {
-      controls.start({
-        ...defaultAnimation,
-        left: '0',
-        width: '100%',
-        height: '100vh',
-      });
+    if (currentPage.isAuthPage) {
+      createAuthPageAnimation(controls, isDesktop);
     }
-    if (isAuthPage) {
-      controls.start({
-        ...defaultAnimation,
-        left: !isDesktop ? '0' : '50%',
-        width: !isDesktop ? '100%' : '50%',
-        height: !isDesktop ? '50vh' : '100vh',
-      });
+    if (currentPage.isContactsPage) {
+      createContactsPageAnimation(controls, isDesktop);
     }
-    if (isContactsPage) {
-      controls.start({
-        ...defaultAnimation,
-        left: '0',
-        width: !isDesktop ? '100%' : '50%',
-        height: !isDesktop ? '80vh' : '100vh',
-      });
+    if (currentPage.isConfirmationPage) {
+      createConfirmationPageAnimation(controls);
     }
-    if (isConfirmationPage) {
-      controls.start({
-        ...defaultAnimation,
-        left: '100%',
-        width: '0',
-        // height: '100vh'
-      });
-    }
-  }, [
-    controls,
-    isAuthPage,
-    isConfirmationPage,
-    isContactsPage,
-    isDesktop,
-    isHomePage,
-  ]);
-
-  const bgAnimation = {
-    initial: {
-      left: isAuthPage ? (!isDesktop ? '0%' : '50%') : '0%',
-      width: !isHomePage ? (!isDesktop ? '100%' : '50%') : '100%',
-      height: !isHomePage ? (!isDesktop ? '50vh' : '100vh') : '100vh',
-      opacity: 0,
-    },
-    animate: controls,
-  };
+  }, [controls, currentPage, isDesktop]);
 
   return (
     <Flex w="100%" h="100vh" overflow="hidden" position="absolute" zIndex="-1">
       <Box
         as={motion.div}
-        {...bgAnimation}
+        {...createBgAnimation(controls, currentPage, isDesktop)}
         position="absolute"
         top="0"
         bgGradient="linear(-20deg, #2b5876 0%, #4e4376 100%)"

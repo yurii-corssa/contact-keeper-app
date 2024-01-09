@@ -4,6 +4,7 @@ import { removeContactThunk } from 'redux/contacts/contacts-operations';
 import { selectVisibleContacts } from 'redux/contacts/contacts-selectors';
 import { FaEllipsisV } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { createContactAnimation } from 'utils/animations';
 import {
   Avatar,
   Flex,
@@ -21,18 +22,6 @@ import {
 export const ContactItems = ({ handleOpenModal }) => {
   const filteredContacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
-
-  const createContactAnimation = delay => ({
-    initial: { opacity: 0, x: 50 },
-    animate: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        x: { duration: 0.5, ease: [0.05, 0.08, 0.24, 0.96], delay },
-        opacity: { duration: 0.3, ease: 'easeIn', delay },
-      },
-    },
-  });
 
   let contactDelayAnimation = 0.3;
 

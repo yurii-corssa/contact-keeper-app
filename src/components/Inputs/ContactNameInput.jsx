@@ -1,5 +1,6 @@
 import { Field } from 'formik';
 import { FaUserAlt } from 'react-icons/fa';
+import { validateName } from 'utils/validateSchemas';
 import {
   FormControl,
   FormErrorMessage,
@@ -11,12 +12,6 @@ import {
 } from '@chakra-ui/react';
 
 const ContactNameInput = ({ variant }) => {
-  const validateName = value => {
-    if (!value) {
-      return 'Name is required';
-    }
-  };
-
   return (
     <Field name="name" validate={validateName}>
       {({ field, form }) => (
